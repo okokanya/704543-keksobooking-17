@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Аня Пушкина](https://up.htmlacademy.ru/javascript/17/user/704543).
-* Наставник: `Неизвестно`.
+* Наставник: `Кирилл Черкалов`.
 
 ---
 
