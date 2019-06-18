@@ -26,14 +26,8 @@ var dataPins = function () {
   }
   return (objectsArray);
 };
-// * <template id="pin">
-// <button type="button" class="map__pin" style="left: 200px; top: 400px;"><img src="img/// // avatars/user07.png" width="40" height="40" draggable="false" alt="Метка объявления">
-// <button>
-// </template>
 
 var pinButton = document.querySelector('.map__pin');
-var pinTemplate = document.querySelector('#pin');
-
 var renderPins = function (pinsDataToRender) {
   for (var i = 0; i < PINNUMBER; i++) {
     var pinElement = pinButton.cloneNode(true);
@@ -41,11 +35,7 @@ var renderPins = function (pinsDataToRender) {
     pinElement.style.top = pinsDataToRender[i].location.y + 'px';
     pinElement.src = '{{pinsData.author.avatar}}';
     pinElement.alt = '{{pinsData.offer}}';
-    // pinTemplate.appendChild(pinElement);
-    console.log(pinElement);
   }
-  // pinTemplate.appendChild(pinElement);
-  // console.log(pinTemplate);
   return pinElement;
 };
 
