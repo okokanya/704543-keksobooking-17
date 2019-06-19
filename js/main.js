@@ -27,7 +27,10 @@ var dataPins = function () {
   return (objectsArray);
 };
 
+var pinTemplate = document.querySelector('#pin');
 var pinButton = document.querySelector('.map__pin');
+var placeForPins = document.querySelector('.map__pins');
+
 var renderPins = function (pinsDataToRender) {
   for (var i = 0; i < PINNUMBER; i++) {
     var pinElement = pinButton.cloneNode(true);
@@ -35,10 +38,10 @@ var renderPins = function (pinsDataToRender) {
     pinElement.style.top = pinsDataToRender[i].location.y + 'px';
     pinElement.src = '{{pinsData.author.avatar}}';
     pinElement.alt = '{{pinsData.offer}}';
+    placeForPins.appendChild(pinElement);
   }
-  return pinElement;
+  return pinTemplate;
 };
-
 
 var fragment = document.createDocumentFragment();
 fragment.appendChild(renderPins(dataPins()));
