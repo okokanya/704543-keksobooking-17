@@ -10,7 +10,6 @@ var getRandomNumber = function (min, max) {
   return randomNumber;
 };
 
-
 function generateRan(max) {
   var random = [];
   for (var i = 0; i < max; i++) {
@@ -21,7 +20,6 @@ function generateRan(max) {
       i--;
     }
   }
-  console.log(random);
   return random;
 }
 
@@ -80,4 +78,3 @@ var renderPins = function (pinsDataToRender) {
 var fragment = document.createDocumentFragment();
 fragment.appendChild(renderPins(dataPins()));
 document.querySelector('.map__pins').appendChild(fragment);
-
