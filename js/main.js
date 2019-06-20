@@ -1,7 +1,61 @@
 'use strict';
 
+var pinTemplate = document.querySelector('#pin');
+var pinButton = document.querySelector('.map__pin');
+var placeForPins = document.querySelector('.map__pins');
+var imgPin = pinButton.querySelector('img');
+var allMap = document.querySelector('.map');
+var allForms = document.querySelector('.ad-form');
+var inputsInFieldsets = document.querySelectorAll('fieldset > input');
+var selectsInFieldsets = document.querySelectorAll('fieldset > select');
+var mapPinMain = document.querySelector('.map__pin--main');
+var addressInput = document.querySelector('#address');
 var PINNUMBER = 8;
 var PINHEIGHT = 70;
+
+// даю классы по нажатию на кнопку
+var getDisabled = function (collectionToDisable) {
+  for (var i = 0; i < collectionToDisable.length; i++) {
+    collectionToDisable[i].disabled = true;
+  }
+};
+
+var getAbled = function (collectionToAble) {
+  for (var i = 0; i < collectionToAble.length; i++) {
+    collectionToAble[i].disabled = false;
+  }
+};
+
+var getInactive = function () {
+  allMap.classList.add('map--faded');
+  allForms.classList.add('ad-form--disabled');
+  getDisabled(selectsInFieldsets);
+  getDisabled(inputsInFieldsets);
+};
+
+var getActive = function () {
+  allMap.classList.remove('map--faded');
+  allForms.classList.remove('ad-form--disabled');
+  getAbled(selectsInFieldsets);
+  getAbled(inputsInFieldsets);
+};
+
+// даю классы по загрузке
+document.addEventListener('DOMContentLoaded', getInactive);
+mapPinMain.addEventListener('click', getActive);
+
+
+// вычисляю координаты нажатия, пытаюсь запихнуть их в инпут
+mapPinMain.addEventListener('mousedown', function (evt) {
+  var PinCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var addressText = document.createElement('p');
+  addressText.textContent = PinCoords.x + ', ' + PinCoords.y;
+  addressInput.appendChild(addressText);
+});
 
 document.querySelector('.map').classList.remove('map--faded');
 
@@ -24,7 +78,6 @@ function generateRan(max) {
 }
 
 var numbArrays = generateRan(8);
-
 
 var getRandomType = function (min, max) {
   var coeff = Math.floor(Math.random() * Math.floor(max));
@@ -59,10 +112,6 @@ var dataPins = function () {
   return (objectsArray);
 };
 
-var pinTemplate = document.querySelector('#pin');
-var pinButton = document.querySelector('.map__pin');
-var placeForPins = document.querySelector('.map__pins');
-var imgPin = pinButton.querySelector('img');
 var renderPins = function (pinsDataToRender) {
   for (var i = 0; i < PINNUMBER; i++) {
     var pinElement = pinButton.cloneNode(true);
