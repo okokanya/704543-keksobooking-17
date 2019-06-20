@@ -51,10 +51,7 @@ mapPinMain.addEventListener('mousedown', function (evt) {
     x: evt.clientX,
     y: evt.clientY
   };
-
-  var addressText = document.createElement('p');
-  addressText.textContent = PinCoords.x + ', ' + PinCoords.y;
-  addressInput.appendChild(addressText);
+  addressInput.value = PinCoords.x + ', ' + PinCoords.y;
 });
 
 document.querySelector('.map').classList.remove('map--faded');
