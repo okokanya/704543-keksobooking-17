@@ -33,6 +33,9 @@ var getInactive = function () {
 };
 
 var getActive = function () {
+  var fragment = document.createDocumentFragment();
+  fragment.appendChild(renderPins(dataPins()));
+  document.querySelector('.map__pins').appendChild(fragment);
   allMap.classList.remove('map--faded');
   allForms.classList.remove('ad-form--disabled');
   getAbled(selectsInFieldsets);
@@ -72,7 +75,7 @@ function generateRan(max) {
 
 var numbArrays = generateRan(8);
 
-var getRandomType = function (min, max) {
+var getRandomType = function (max) {
   var coeff = Math.floor(Math.random() * Math.floor(max));
   if (coeff === 0) {
     return 'palace';
@@ -116,7 +119,3 @@ var renderPins = function (pinsDataToRender) {
   }
   return pinTemplate;
 };
-
-var fragment = document.createDocumentFragment();
-fragment.appendChild(renderPins(dataPins()));
-document.querySelector('.map__pins').appendChild(fragment);
