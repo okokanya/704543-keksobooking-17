@@ -11,11 +11,21 @@ var selectsInFieldsets = document.querySelectorAll('fieldset > select');
 var mapPinMain = document.querySelector('.map__pin--main');
 var addressInput = document.querySelector('#address');
 var priceForNight = document.querySelector('#price');
-// var timein = document.querySelector('#timein');
-// var timeout = document.querySelector('#timeout');
+var timein = document.querySelector('#timein');
+var timeout = document.querySelector('#timeout');
+var placeType = document.querySelector('#type');
 
 var PINNUMBER = 8;
 var PINHEIGHT = 70;
+
+var indexSelect = function () {
+  var timeinSelect = timein.selectedIndex;
+  var timeoutSelect;
+  timeoutSelect = timeinSelect;
+  timeout.selectedIndex = timeoutSelect;
+};
+
+timein.addEventListener('change', indexSelect);
 
 var getDisabled = function (collectionToDisable) {
   for (var i = 0; i < collectionToDisable.length; i++) {
@@ -29,6 +39,30 @@ var getAbled = function (collectionToAble) {
   }
 };
 
+var setMinPrice = function () {
+  switch (placeType.value) {
+    case 'palace':
+      priceForNight.min = '10000';
+      priceForNight.placeholder = '10000';
+      break;
+    case 'flat':
+      priceForNight.min = '1000';
+      priceForNight.placeholder = '1000';
+      break;
+    case 'house':
+      priceForNight.min = '5000';
+      priceForNight.placeholder = '5000';
+      break;
+    case 'bungalo':
+      priceForNight.min = '0';
+      priceForNight.placeholder = '0';
+      break;
+  }
+};
+
+placeType.addEventListener('change', setMinPrice);
+
+
 var getInactive = function () {
   allMap.classList.add('map--faded');
   allForms.classList.add('ad-form--disabled');
@@ -36,21 +70,12 @@ var getInactive = function () {
   getDisabled(inputsInFieldsets);
 };
 
-var setMinPrice = function () {
-  if (dataPins.type === 'palace') {
-    priceForNight.min = '10000';
-  } else if (dataPins.type === 'flat') {
-    priceForNight.min = '1000';
-  } else if (dataPins.type === 'house') {
-    priceForNight.min = '5000';
-  } else {
-    priceForNight.min = '0';
-  }
-};
+document.addEventListener('DOMContentLoaded', getInactive);
 
 var getActive = function () {
   var fragment = document.createDocumentFragment();
   fragment.appendChild(renderPins(dataPins()));
+  indexSelect();
   setMinPrice();
   document.querySelector('.map__pins').appendChild(fragment);
   allMap.classList.remove('map--faded');
@@ -59,7 +84,6 @@ var getActive = function () {
   getAbled(inputsInFieldsets);
 };
 
-document.addEventListener('DOMContentLoaded', getInactive);
 mapPinMain.addEventListener('click', getActive);
 
 mapPinMain.addEventListener('mousedown', function (evt) {
