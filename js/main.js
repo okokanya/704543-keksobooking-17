@@ -1,7 +1,57 @@
 'use strict';
 
+var pinTemplate = document.querySelector('#pin');
+var pinButton = document.querySelector('.map__pin');
+var placeForPins = document.querySelector('.map__pins');
+var imgPin = pinButton.querySelector('img');
+var allMap = document.querySelector('.map');
+var allForms = document.querySelector('.ad-form');
+var inputsInFieldsets = document.querySelectorAll('fieldset > input');
+var selectsInFieldsets = document.querySelectorAll('fieldset > select');
+var mapPinMain = document.querySelector('.map__pin--main');
+var addressInput = document.querySelector('#address');
 var PINNUMBER = 8;
 var PINHEIGHT = 70;
+
+var getDisabled = function (collectionToDisable) {
+  for (var i = 0; i < collectionToDisable.length; i++) {
+    collectionToDisable[i].disabled = true;
+  }
+};
+
+var getAbled = function (collectionToAble) {
+  for (var i = 0; i < collectionToAble.length; i++) {
+    collectionToAble[i].disabled = false;
+  }
+};
+
+var getInactive = function () {
+  allMap.classList.add('map--faded');
+  allForms.classList.add('ad-form--disabled');
+  getDisabled(selectsInFieldsets);
+  getDisabled(inputsInFieldsets);
+};
+
+var getActive = function () {
+  var fragment = document.createDocumentFragment();
+  fragment.appendChild(renderPins(dataPins()));
+  document.querySelector('.map__pins').appendChild(fragment);
+  allMap.classList.remove('map--faded');
+  allForms.classList.remove('ad-form--disabled');
+  getAbled(selectsInFieldsets);
+  getAbled(inputsInFieldsets);
+};
+
+document.addEventListener('DOMContentLoaded', getInactive);
+mapPinMain.addEventListener('click', getActive);
+
+mapPinMain.addEventListener('mousedown', function (evt) {
+  var PinCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+  addressInput.value = PinCoords.x + ', ' + PinCoords.y;
+});
 
 document.querySelector('.map').classList.remove('map--faded');
 
@@ -25,8 +75,7 @@ function generateRan(max) {
 
 var numbArrays = generateRan(8);
 
-
-var getRandomType = function (min, max) {
+var getRandomType = function (max) {
   var coeff = Math.floor(Math.random() * Math.floor(max));
   if (coeff === 0) {
     return 'palace';
@@ -59,10 +108,6 @@ var dataPins = function () {
   return (objectsArray);
 };
 
-var pinTemplate = document.querySelector('#pin');
-var pinButton = document.querySelector('.map__pin');
-var placeForPins = document.querySelector('.map__pins');
-var imgPin = pinButton.querySelector('img');
 var renderPins = function (pinsDataToRender) {
   for (var i = 0; i < PINNUMBER; i++) {
     var pinElement = pinButton.cloneNode(true);
@@ -74,7 +119,3 @@ var renderPins = function (pinsDataToRender) {
   }
   return pinTemplate;
 };
-
-var fragment = document.createDocumentFragment();
-fragment.appendChild(renderPins(dataPins()));
-document.querySelector('.map__pins').appendChild(fragment);
