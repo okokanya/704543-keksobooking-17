@@ -18,14 +18,23 @@ var placeType = document.querySelector('#type');
 var PINNUMBER = 8;
 var PINHEIGHT = 70;
 
-var indexSelect = function () {
+var indexInSelect = function () {
   var timeinSelect = timein.selectedIndex;
   var timeoutSelect;
   timeoutSelect = timeinSelect;
   timeout.selectedIndex = timeoutSelect;
 };
 
-timein.addEventListener('change', indexSelect);
+var indexOutSelect = function () {
+  var timeOutSelect = timeout.selectedIndex;
+  var timeInSelect;
+  timeInSelect = timeOutSelect;
+  timein.selectedIndex = timeInSelect;
+};
+
+timein.addEventListener('change', indexInSelect);
+timeout.addEventListener('change', indexOutSelect);
+
 
 var getDisabled = function (collectionToDisable) {
   for (var i = 0; i < collectionToDisable.length; i++) {
@@ -75,7 +84,9 @@ document.addEventListener('DOMContentLoaded', getInactive);
 var getActive = function () {
   var fragment = document.createDocumentFragment();
   fragment.appendChild(renderPins(dataPins()));
-  indexSelect();
+  indexInSelect();
+  indexOutSelect();
+
   setMinPrice();
   document.querySelector('.map__pins').appendChild(fragment);
   allMap.classList.remove('map--faded');
