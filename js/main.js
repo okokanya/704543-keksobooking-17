@@ -10,6 +10,10 @@ var inputsInFieldsets = document.querySelectorAll('fieldset > input');
 var selectsInFieldsets = document.querySelectorAll('fieldset > select');
 var mapPinMain = document.querySelector('.map__pin--main');
 var addressInput = document.querySelector('#address');
+var priceForNight = document.querySelector('#price');
+// var timein = document.querySelector('#timein');
+// var timeout = document.querySelector('#timeout');
+
 var PINNUMBER = 8;
 var PINHEIGHT = 70;
 
@@ -32,9 +36,22 @@ var getInactive = function () {
   getDisabled(inputsInFieldsets);
 };
 
+var setMinPrice = function () {
+  if (dataPins.type === 'palace') {
+    priceForNight.min = '10000';
+  } else if (dataPins.type === 'flat') {
+    priceForNight.min = '1000';
+  } else if (dataPins.type === 'house') {
+    priceForNight.min = '5000';
+  } else {
+    priceForNight.min = '0';
+  }
+};
+
 var getActive = function () {
   var fragment = document.createDocumentFragment();
   fragment.appendChild(renderPins(dataPins()));
+  setMinPrice();
   document.querySelector('.map__pins').appendChild(fragment);
   allMap.classList.remove('map--faded');
   allForms.classList.remove('ad-form--disabled');
