@@ -14,6 +14,8 @@ var priceForNight = document.querySelector('#price');
 var timein = document.querySelector('#timein');
 var timeout = document.querySelector('#timeout');
 var placeType = document.querySelector('#type');
+var xcoord;
+var ycoord;
 
 var PINNUMBER = 8;
 var PINHEIGHT = 70;
@@ -103,6 +105,7 @@ mapPinMain.addEventListener('mousedown', function (evt) {
     y: evt.clientY
   };
 
+
   var onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
 
@@ -110,7 +113,6 @@ mapPinMain.addEventListener('mousedown', function (evt) {
       x: startCoords.x - moveEvt.clientX,
       y: startCoords.y - moveEvt.clientY
     };
-
     startCoords = {
       x: moveEvt.clientX,
       y: moveEvt.clientY
@@ -118,24 +120,32 @@ mapPinMain.addEventListener('mousedown', function (evt) {
 
     mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
     mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+    xcoord = mapPinMain.offsetLeft - shift.x;
+    ycoord = mapPinMain.offsetLeft - shift.y;
+
   };
+
+
   var onMouseUp = function (upEvt) {
     upEvt.preventDefault();
+    addressInput.value = xcoord + ', ' + ycoord;
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
   };
 
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
+  document.addEventListener('mouseup', getActive);
+
 });
 
-mapPinMain.addEventListener('mousedown', function (evt) {
-  var PinCoords = {
-    x: evt.clientX,
-    y: evt.clientY
-  };
-  addressInput.value = PinCoords.x + ', ' + PinCoords.y;
-});
+// mapPinMain.addEventListener('mousedown', function (evt) {
+//   var PinCoords = {
+//     x: evt.clientX,
+//     y: evt.clientY
+//   };
+//   addressInput.value = PinCoords.x + ', ' + PinCoords.y;
+// });
 
 document.querySelector('.map').classList.remove('map--faded');
 
