@@ -14,6 +14,7 @@ var priceForNight = document.querySelector('#price');
 var timein = document.querySelector('#timein');
 var timeout = document.querySelector('#timeout');
 var placeType = document.querySelector('#type');
+var mapfield = document.querySelector('.map__pins');
 var xcoord;
 var ycoord;
 
@@ -119,10 +120,10 @@ mapPinMain.addEventListener('mousedown', function (evt) {
     xcoord = mapPinMain.offsetLeft - shift.x;
     addressInput.value = xcoord + ', ' + ycoord;
 
-    if (xcoord > 50 && xcoord < 1090) {
+    if (xcoord > (mapfield.offsetWidth / 100 * 5) && xcoord < mapfield.offsetWidth - (mapfield.offsetWidth / 100 * 10)) {
       mapPinMain.style.left = xcoord + 'px';
     }
-    if (ycoord > 50 && ycoord < 640) {
+    if (ycoord > 50 && ycoord < mapfield.offsetHeight - mapfield.offsetHeight / 100 * 10) {
       mapPinMain.style.top = ycoord + 'px';
     }
   };
