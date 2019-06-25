@@ -73,7 +73,6 @@ var setMinPrice = function () {
 
 placeType.addEventListener('change', setMinPrice);
 
-
 var getInactive = function () {
   allMap.classList.add('map--faded');
   allForms.classList.add('ad-form--disabled');
@@ -116,12 +115,16 @@ mapPinMain.addEventListener('mousedown', function (evt) {
       y: sortOfMouseMovm.clientY
     };
 
-    mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-    mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
-    xcoord = mapPinMain.offsetLeft - shift.x;
     ycoord = mapPinMain.offsetTop - shift.y;
+    xcoord = mapPinMain.offsetLeft - shift.x;
     addressInput.value = xcoord + ', ' + ycoord;
 
+    if (xcoord > 50 && xcoord < 1090) {
+      mapPinMain.style.left = xcoord + 'px';
+    }
+    if (ycoord > 50 && ycoord < 640) {
+      mapPinMain.style.top = ycoord + 'px';
+    }
   };
 
   var onMouseMove = function (moveEvt) {
@@ -132,7 +135,6 @@ mapPinMain.addEventListener('mousedown', function (evt) {
   var onMouseUp = function (upEvt) {
     upEvt.preventDefault();
     getCoords(upEvt);
-
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
   };
@@ -140,7 +142,6 @@ mapPinMain.addEventListener('mousedown', function (evt) {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
   document.addEventListener('mouseup', getActive);
-
 });
 
 document.querySelector('.map').classList.remove('map--faded');
