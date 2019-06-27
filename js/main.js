@@ -14,6 +14,9 @@ var priceForNight = document.querySelector('#price');
 var timein = document.querySelector('#timein');
 var timeout = document.querySelector('#timeout');
 var placeType = document.querySelector('#type');
+var mapfield = document.querySelector('.map__pins');
+var xcoord;
+var ycoord;
 
 var PINNUMBER = 8;
 var PINHEIGHT = 70;
@@ -71,7 +74,6 @@ var setMinPrice = function () {
 
 placeType.addEventListener('change', setMinPrice);
 
-
 var getInactive = function () {
   allMap.classList.add('map--faded');
   allForms.classList.add('ad-form--disabled');
@@ -95,14 +97,52 @@ var getActive = function () {
   getAbled(inputsInFieldsets);
 };
 
-mapPinMain.addEventListener('click', getActive);
-
 mapPinMain.addEventListener('mousedown', function (evt) {
-  var PinCoords = {
+  evt.preventDefault();
+
+  var startCoords = {
     x: evt.clientX,
     y: evt.clientY
   };
-  addressInput.value = PinCoords.x + ', ' + PinCoords.y;
+
+  var getCoords = function (sortOfMouseMovm) {
+    var shift = {
+      x: startCoords.x - sortOfMouseMovm.clientX,
+      y: startCoords.y - sortOfMouseMovm.clientY
+    };
+
+    startCoords = {
+      x: sortOfMouseMovm.clientX,
+      y: sortOfMouseMovm.clientY
+    };
+
+    ycoord = mapPinMain.offsetTop - shift.y;
+    xcoord = mapPinMain.offsetLeft - shift.x;
+    addressInput.value = xcoord + ', ' + ycoord;
+
+    if (xcoord > (mapfield.offsetWidth / 100 * 5) && xcoord < mapfield.offsetWidth - (mapfield.offsetWidth / 100 * 10)) {
+      mapPinMain.style.left = xcoord + 'px';
+    }
+    if (ycoord > 50 && ycoord < mapfield.offsetHeight - mapfield.offsetHeight / 100 * 10) {
+      mapPinMain.style.top = ycoord + 'px';
+    }
+  };
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+    getCoords(moveEvt);
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+    getCoords(upEvt);
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+  document.addEventListener('mouseup', getActive);
 });
 
 document.querySelector('.map').classList.remove('map--faded');
