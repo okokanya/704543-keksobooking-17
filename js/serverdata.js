@@ -42,5 +42,5 @@ xhr.addEventListener('load', function () {
   }
 });
 
-xhr.open('GET', 'https://js.dump.academy/keksobo666oking/data');
+xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
 xhr.send();
