@@ -69,7 +69,7 @@
 
   window.getActive = function () {
     var fragment = document.createDocumentFragment();
-    fragment.appendChild(window.renderPins(window.dataPins()));
+    fragment.appendChild(window.renderPins(window.myServerData));
     window.indexInSelect();
     window.indexOutSelect();
 
