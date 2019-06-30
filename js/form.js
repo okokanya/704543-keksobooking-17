@@ -1,19 +1,6 @@
 'use strict';
 
 (function () {
-  window.getRandomType = function (max) {
-    var coeff = Math.floor(Math.random() * Math.floor(max));
-    if (coeff === 0) {
-      return 'palace';
-    } else if (coeff === 1) {
-      return 'flat';
-    } else if (coeff === 2) {
-      return 'house';
-    } else {
-      return 'bungalo';
-    }
-  };
-
   window.setMinPrice = function () {
     var minPriceDict = {
       'palace': '10000',
