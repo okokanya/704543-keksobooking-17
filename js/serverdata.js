@@ -7,9 +7,6 @@ var cloneError = document.importNode(errorTemplate.content, true);
 var pp = cloneError.querySelector('.error__message');
 var button = cloneError.querySelector('.error__button');
 
-function isbungalo(item) {
-  return (item.offer.type === 'bungalo');
-}
 
 var onError = function (message) {
   window.main.appendChild(cloneError);
@@ -20,7 +17,19 @@ var onError = function (message) {
 var onSuccess = function (data) {
   window.myServerData = data;
   window.firstFivePins = window.myServerData.slice(0, 5);
-  window.filteredTypeFlatPins = window.myServerData.filter(isbungalo);
+
+  function typeOfFlat(item) {
+    var typeDict = {
+      0: 'flat',
+      1: 'palace',
+      2: 'flat',
+      3: 'house',
+      4: 'bungalo'
+    };
+    return (item.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
+  }
+
+  window.filteredTypeFlatPins = window.myServerData.filter(typeOfFlat);
 };
 
 var xhr = new XMLHttpRequest();
@@ -47,6 +56,8 @@ xhr.addEventListener('load', function () {
     onError(error);
   }
 });
+
+
 
 
 xhr.open('GET', 'https://js.dump.academy/keksobooking/data');

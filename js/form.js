@@ -29,7 +29,6 @@
 
   window.timein.addEventListener('change', window.indexInSelect);
   window.timeout.addEventListener('change', window.indexOutSelect);
-
   window.homeTypeFilter.addEventListener('change', window.changeTypeFlat);
 
 })();

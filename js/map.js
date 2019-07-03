@@ -81,6 +81,7 @@
     getAbled(window.inputsInFieldsets);
   };
 
+
   window.changeTypeFlat = function () {
     window.pinButtonAll = document.querySelectorAll('.map__pin--main');
 
