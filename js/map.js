@@ -68,16 +68,25 @@
   document.addEventListener('DOMContentLoaded', window.getInactive);
 
   window.getActive = function () {
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(window.renderPins(window.myServerData));
+
+    window.fragment = document.createDocumentFragment();
+    window.fragment.appendChild(window.renderPins(window.firstFivePins));
     window.indexInSelect();
     window.indexOutSelect();
-
     window.setMinPrice();
-    document.querySelector('.map__pins').appendChild(fragment);
+    window.mapfield.appendChild(window.fragment);
     window.allMap.classList.remove('map--faded');
     window.allForms.classList.remove('ad-form--disabled');
     getAbled(window.selectsInFieldsets);
     getAbled(window.inputsInFieldsets);
+    window.pinButtonAll = document.querySelectorAll('.map__pin--main');
   };
+
+  window.changeTypeFlat = function () {
+    window.pinButtonAll.remove();
+    var fragment2 = document.createDocumentFragment();
+    fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
+    document.querySelector('.map__pins').appendChild(fragment2);
+  };
+
 })();

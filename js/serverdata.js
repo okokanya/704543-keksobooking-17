@@ -7,6 +7,10 @@ var cloneError = document.importNode(errorTemplate.content, true);
 var pp = cloneError.querySelector('.error__message');
 var button = cloneError.querySelector('.error__button');
 
+function isbungalo(item) {
+  return (item.offer.type === 'bungalo');
+}
+
 var onError = function (message) {
   window.main.appendChild(cloneError);
   button.style.display = 'none';
@@ -15,6 +19,8 @@ var onError = function (message) {
 
 var onSuccess = function (data) {
   window.myServerData = data;
+  window.firstFivePins = window.myServerData.slice(0, 5);
+  window.filteredTypeFlatPins = window.myServerData.filter(isbungalo);
 };
 
 var xhr = new XMLHttpRequest();
@@ -42,5 +48,7 @@ xhr.addEventListener('load', function () {
   }
 });
 
+
 xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
 xhr.send();
+
