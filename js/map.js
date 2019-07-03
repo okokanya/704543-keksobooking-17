@@ -83,7 +83,7 @@
   };
 
   window.changeTypeFlat = function () {
-    window.pinButtonAll.remove();
+    window.mapfield.removeChild(window.pinButtonAll);
     var fragment2 = document.createDocumentFragment();
     fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
     document.querySelector('.map__pins').appendChild(fragment2);
