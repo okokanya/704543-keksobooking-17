@@ -79,11 +79,14 @@
     window.allForms.classList.remove('ad-form--disabled');
     getAbled(window.selectsInFieldsets);
     getAbled(window.inputsInFieldsets);
-    window.pinButtonAll = document.querySelectorAll('.map__pin--main');
   };
 
   window.changeTypeFlat = function () {
-    window.mapfield.removeChild(window.pinButtonAll);
+    window.pinButtonAll = document.querySelectorAll('.map__pin--main');
+
+    window.pinButtonAll.forEach(function (item) {
+      item.remove();
+    });
     var fragment2 = document.createDocumentFragment();
     fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
     document.querySelector('.map__pins').appendChild(fragment2);
