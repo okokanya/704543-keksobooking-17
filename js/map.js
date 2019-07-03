@@ -68,7 +68,6 @@
   document.addEventListener('DOMContentLoaded', window.getInactive);
 
   window.getActive = function () {
-
     window.fragment = document.createDocumentFragment();
     window.fragment.appendChild(window.renderPins(window.firstFivePins));
     window.indexInSelect();
@@ -81,7 +80,6 @@
     getAbled(window.inputsInFieldsets);
   };
 
-
   window.changeTypeFlat = function () {
     window.pinButtonAll = document.querySelectorAll('.map__pin--main');
 
@@ -92,5 +90,4 @@
     fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
     document.querySelector('.map__pins').appendChild(fragment2);
   };
-
 })();

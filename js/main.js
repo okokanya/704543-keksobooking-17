@@ -1,7 +1,6 @@
 'use strict';
 
 window.pinTemplate = document.querySelector('#pin');
-
 window.pinButton = document.querySelector('.map__pin');
 window.placeForPins = document.querySelector('.map__pins');
 window.imgPin = window.pinButton.querySelector('img');
