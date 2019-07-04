@@ -43,7 +43,7 @@
     };
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-    document.addEventListener('mouseup', window.getActive);
+    window.mapPinMain.addEventListener('mouseup', window.getActive);
   });
   document.querySelector('.map').classList.remove('map--faded');
 
