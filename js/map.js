@@ -82,11 +82,30 @@
   };
 
   window.changeTypeFlat = function () {
-    window.pinButtonAll = document.querySelectorAll('.map__pin--main');
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', function () {
+      function typeOfFlat(item) {
+        var typeDict = {
+          0: 'flat',
+          1: 'palace',
+          2: 'flat',
+          3: 'house',
+          4: 'bungalo'
+        };
+        return (item.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
+      }
+      window.filteredTypeFlatPins = xhr.response.filter(typeOfFlat(xhr.response));
+    });
 
+    xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
+    xhr.send();
+
+    window.pinButtonAll = document.querySelectorAll('.map__pin--main');
     window.pinButtonAll.forEach(function (item) {
       item.remove();
     });
+
     var fragment2 = document.createDocumentFragment();
     fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
     document.querySelector('.map__pins').appendChild(fragment2);
