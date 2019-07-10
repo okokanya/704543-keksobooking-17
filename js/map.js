@@ -43,7 +43,7 @@
     };
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-    document.addEventListener('mouseup', window.getActive);
+    window.mapPinMain.addEventListener('mouseup', window.getActive);
   });
   document.querySelector('.map').classList.remove('map--faded');
 
@@ -68,16 +68,46 @@
   document.addEventListener('DOMContentLoaded', window.getInactive);
 
   window.getActive = function () {
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(window.renderPins(window.myServerData));
+    window.fragment = document.createDocumentFragment();
+    window.fragment.appendChild(window.renderPins(window.firstFivePins));
     window.indexInSelect();
     window.indexOutSelect();
-
     window.setMinPrice();
-    document.querySelector('.map__pins').appendChild(fragment);
+    window.mapfield.appendChild(window.fragment);
     window.allMap.classList.remove('map--faded');
     window.allForms.classList.remove('ad-form--disabled');
     getAbled(window.selectsInFieldsets);
     getAbled(window.inputsInFieldsets);
+    document.removeEventListener('mouseup', window.getActive);
+  };
+
+  window.changeTypeFlat = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', function () {
+      function typeOfFlat(item) {
+        var typeDict = {
+          0: 'flat',
+          1: 'palace',
+          2: 'flat',
+          3: 'house',
+          4: 'bungalo'
+        };
+        return (item.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
+      }
+      window.filteredTypeFlatPins = xhr.response.filter(typeOfFlat(xhr.response));
+    });
+
+    xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
+    xhr.send();
+
+    window.pinButtonAll = document.querySelectorAll('.map__pin--main');
+    window.pinButtonAll.forEach(function (item) {
+      item.remove();
+    });
+
+    var fragment2 = document.createDocumentFragment();
+    fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
+    document.querySelector('.map__pins').appendChild(fragment2);
   };
 })();

@@ -2,7 +2,7 @@
 
 (function () {
   window.renderPins = function (pinsDataToRender) {
-    for (var i = 0; i < window.PINNUMBER; i++) {
+    for (var i = 0; i < pinsDataToRender.length; i++) {
       var pinElement = window.pinButton.cloneNode(true);
       pinElement.style.left = pinsDataToRender[i].location.x + 'px';
       pinElement.style.top = pinsDataToRender[i].location.y - window.PINHEIGHT + 'px';

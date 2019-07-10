@@ -7,6 +7,7 @@ var cloneError = document.importNode(errorTemplate.content, true);
 var pp = cloneError.querySelector('.error__message');
 var button = cloneError.querySelector('.error__button');
 
+
 var onError = function (message) {
   window.main.appendChild(cloneError);
   button.style.display = 'none';
@@ -15,6 +16,20 @@ var onError = function (message) {
 
 var onSuccess = function (data) {
   window.myServerData = data;
+  window.firstFivePins = window.myServerData.slice(0, 5);
+
+  function typeOfFlat(item) {
+    var typeDict = {
+      0: 'flat',
+      1: 'palace',
+      2: 'flat',
+      3: 'house',
+      4: 'bungalo'
+    };
+    return (item.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
+  }
+
+  window.filteredTypeFlatPins = window.myServerData.filter(typeOfFlat);
 };
 
 var xhr = new XMLHttpRequest();
