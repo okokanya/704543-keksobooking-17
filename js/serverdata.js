@@ -28,7 +28,6 @@ var onSuccess = function (data) {
     };
     return (item.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
   }
-
   window.filteredTypeFlatPins = window.myServerData.filter(typeOfFlat);
 };
 

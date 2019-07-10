@@ -85,19 +85,27 @@
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
-      function typeOfFlat(item) {
-        var typeDict = {
-          0: 'flat',
-          1: 'palace',
-          2: 'flat',
-          3: 'house',
-          4: 'bungalo'
-        };
-        return (item.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
-      }
-      window.filteredTypeFlatPins = xhr.response.filter(typeOfFlat(xhr.response));
+    //   function typeOfFlat(item) {
+    //     var typeDict = {
+    //       0: 'flat',
+    //       1: 'palace',
+    //       2: 'flat',
+    //       3: 'house',
+    //       4: 'bungalo'
+    //     };
+    //     return (item.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
+    //   }
+      var typeDict = {
+        0: 'flat',
+        1: 'palace',
+        2: 'flat',
+        3: 'house',
+        4: 'bungalo'
+      };
+      window.filteredTypeFlatPins = xhr.response.filter(function (it) {
+        return it.offer.type === typeDict[window.homeTypeFilter.selectedIndex];
+      });
     });
-
     xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
     xhr.send();
 
