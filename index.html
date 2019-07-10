@@ -100,11 +100,11 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="title">Заголовок объявления</label>
-          <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио">
+          <input required id="title" minlength="30" maxlength="100" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио">
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес</label>
-          <input id="address" name="address" type="text">
+          <input id="address" name="address" type="text" readonly>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -117,7 +117,7 @@
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="5000">
+          <input id="price" required name="price" type="number" max="10000" placeholder="5000">
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
           <label class="ad-form__label" for="timein">Время заезда и выезда</label>
@@ -127,8 +127,8 @@
             <option value="14:00">После 14</option>
           </select>
           <select id="timeout" name="timeout" title="Time to go out">
-            <option value="12:00" selected>Выезд до 12</option>
-            <option value="13:00">Выезд до 13</option>
+            <option value="12:00" selected >Выезд до 12</option>
+            <option value="13:00" >Выезд до 13</option>
             <option value="14:00">Выезд до 14</option>
           </select>
         </fieldset>
@@ -145,7 +145,7 @@
           <label class="ad-form__label" for="capacity">Количество мест</label>
           <select id="capacity" name="capacity">
             <option value="3" selected>для 3 гостей</option>
-            <option value="2">для ffff 2 гостей</option>
+            <option value="2">для 2 гостей</option>
             <option value="1">для 1 гостя</option>
             <option value="0">не для гостей</option>
           </select>
@@ -247,6 +247,10 @@
       <button class="error__button" href="#">Попробовать снова</button>
     </div>
   </template>
-
+  <script src='js/main.js'></script>
+  <script src='js/serverdata.js'></script>
+  <script src='js/map.js'></script>
+  <script src='js/pin.js'></script>
+  <script src='js/form.js'></script>
 </body>
 </html>
