@@ -8,7 +8,7 @@
       pinElement.style.top = pinsDataToRender[i].location.y - window.PINHEIGHT + 'px';
       window.imgPin.src = pinsDataToRender[i].author.avatar;
       window.imgPin.alt = pinsDataToRender[i].offer.type;
-      window.placeForPins.appendChild(pinElement);
+      window.mapfield.appendChild(pinElement);
     }
     return window.pinTemplate;
   };

@@ -17,6 +17,9 @@ var onError = function (message) {
 var onSuccess = function (data) {
   window.myServerData = data;
   window.firstFivePins = window.myServerData.slice(0, 5);
+  window.forPopUpBlock = window.firstFivePins[1];
+
+  // window.forPopUpBlock = window.myServerData.slice(0, 1).[];
 
   function typeOfFlat(item) {
     var typeDict = {

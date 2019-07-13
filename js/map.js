@@ -7,6 +7,7 @@
   window.ycoord = ycoord;
 
   window.mapPinMain.addEventListener('mousedown', function (evt) {
+
     evt.preventDefault();
     var startCoords = {
       x: evt.clientX,
@@ -31,6 +32,7 @@
         window.mapPinMain.style.top = window.ycoord + 'px';
       }
     };
+
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
       getCoords(moveEvt);
@@ -44,6 +46,7 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
     window.mapPinMain.addEventListener('mouseup', window.getActive);
+
   });
   document.querySelector('.map').classList.remove('map--faded');
 
@@ -70,6 +73,7 @@
   window.getActive = function () {
     window.fragment = document.createDocumentFragment();
     window.fragment.appendChild(window.renderPins(window.firstFivePins));
+    window.showFlatInfo(window.forPopUpBlock);
     window.indexInSelect();
     window.indexOutSelect();
     window.setMinPrice();
@@ -79,22 +83,13 @@
     getAbled(window.selectsInFieldsets);
     getAbled(window.inputsInFieldsets);
     document.removeEventListener('mouseup', window.getActive);
+
   };
 
   window.changeTypeFlat = function () {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
-    //   function typeOfFlat(item) {
-    //     var typeDict = {
-    //       0: 'flat',
-    //       1: 'palace',
-    //       2: 'flat',
-    //       3: 'house',
-    //       4: 'bungalo'
-    //     };
-    //     return (item.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
-    //   }
       var typeDict = {
         0: 'flat',
         1: 'palace',
