@@ -19,9 +19,14 @@
       'bungalo': 'Бунгало'
     };
     type.textContent = typeDict[dataForPopUpBlock.offer.type];
-
+    
+    function declensionOfNumber(number, titles) {
+        var cases = [2, 0, 1, 1, 1, 2];
+        return [titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ]].join(' ');
+    }
+   
     var capacity = window.flatInfoTemplate.querySelector('.popup__text--capacity');
-    capacity.textContent = dataForPopUpBlock.offer.rooms + ' комнаты для ' + dataForPopUpBlock.offer.rooms + ' гостей';
+    capacity.textContent = dataForPopUpBlock.offer.rooms + ' ' +  declensionOfNumber(dataForPopUpBlock.offer.rooms, ['комната', 'комнаты', 'комнат']) + ' для ' + dataForPopUpBlock.offer.guests + ' ' + declensionOfNumber(dataForPopUpBlock.offer.guests, ['гостя', 'гостей', 'гостей']) ;
 
     var arriveLeaveTime = window.flatInfoTemplate.querySelector('.popup__text--time');
     arriveLeaveTime.textContent = 'Заезд после ' + dataForPopUpBlock.offer.checkin + ', выезд до ' + dataForPopUpBlock.offer.checkout;
