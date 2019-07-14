@@ -83,7 +83,6 @@
     getAbled(window.selectsInFieldsets);
     getAbled(window.inputsInFieldsets);
     document.removeEventListener('mouseup', window.getActive);
-
   };
 
   window.changeTypeFlat = function () {

@@ -1,6 +1,20 @@
 'use strict';
 (function () {
+
   window.showFlatInfo = function (dataForPopUpBlock) {
+    var benefitsArray = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+    var placeBenefits = benefitsArray.filter(function (n) {
+      return dataForPopUpBlock.offer.features.indexOf(n) !== -1;
+    });
+
+    window.featureslist = window.flatInfo.querySelector('.popup__features');
+    for (var i = 0; i < placeBenefits.length; i++) {
+      window.liOfBenefit = document.createElement('li');
+      window.liOfBenefit.classList.add('popup__feature');
+      window.liOfBenefit.classList.add('popup__feature--' + placeBenefits[i]);
+      window.featureslist.appendChild(window.liOfBenefit);
+    }
+
     window.flatInfoTemplate = window.flatInfo.cloneNode(true);
     var title = window.flatInfoTemplate.querySelector('.popup__title');
     title.textContent = dataForPopUpBlock.offer.title;
@@ -18,24 +32,35 @@
       'house': 'Дом',
       'bungalo': 'Бунгало'
     };
+
     type.textContent = typeDict[dataForPopUpBlock.offer.type];
-    
     function declensionOfNumber(number, titles) {
-        var cases = [2, 0, 1, 1, 1, 2];
-        return [titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ]].join(' ');
+      var cases = [2, 0, 1, 1, 1, 2];
+      return [titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]]].join(' ');
     }
-   
     var capacity = window.flatInfoTemplate.querySelector('.popup__text--capacity');
-    capacity.textContent = dataForPopUpBlock.offer.rooms + ' ' +  declensionOfNumber(dataForPopUpBlock.offer.rooms, ['комната', 'комнаты', 'комнат']) + ' для ' + dataForPopUpBlock.offer.guests + ' ' + declensionOfNumber(dataForPopUpBlock.offer.guests, ['гостя', 'гостей', 'гостей']) ;
+    capacity.textContent = dataForPopUpBlock.offer.rooms + ' ' + declensionOfNumber(dataForPopUpBlock.offer.rooms, ['комната', 'комнаты', 'комнат']) + ' для ' + dataForPopUpBlock.offer.guests + ' ' + declensionOfNumber(dataForPopUpBlock.offer.guests, ['гостя', 'гостей', 'гостей']);
 
     var arriveLeaveTime = window.flatInfoTemplate.querySelector('.popup__text--time');
     arriveLeaveTime.textContent = 'Заезд после ' + dataForPopUpBlock.offer.checkin + ', выезд до ' + dataForPopUpBlock.offer.checkout;
 
-    var Benefits = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner' ];
-    console.log(Benefits.filter(value => -1 !== dataForPopUpBlock.offer.features.indexOf(value)))
-
-
+    var description = window.flatInfoTemplate.querySelector('.popup__description');
+    description.textContent = dataForPopUpBlock.offer.description;
     window.allMap.insertBefore(window.flatInfoTemplate, window.filterContainer);
+
+    var avatar = window.flatInfoTemplate.querySelector('.popup__avatar');
+    avatar.src = dataForPopUpBlock.author.avatar;
+
+    window.popupphoto = document.querySelector('.popup__photos');
+    for (var k = 0; k < dataForPopUpBlock.offer.photos.length; k++) {
+      window.popUpImg = document.createElement('img');
+      window.popUpImg.classList.add('popup__photo');
+      window.popUpImg.width = 45;
+      window.popUpImg.height = 40;
+      window.popUpImg.alt = dataForPopUpBlock.offer.title;
+      window.popUpImg.src = dataForPopUpBlock.offer.photos[k];
+      window.popupphoto.appendChild(window.popUpImg);
+    }
   };
   return window.flatInfoTemplate;
 })();

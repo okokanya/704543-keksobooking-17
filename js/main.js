@@ -18,6 +18,5 @@ window.priceForNight = document.querySelector('#price');
 window.timein = document.querySelector('#timein');
 window.timeout = document.querySelector('#timeout');
 window.placeType = document.querySelector('#type');
-
 window.homeTypeFilter = document.querySelector('#housing-type');
 window.PINHEIGHT = 70;
