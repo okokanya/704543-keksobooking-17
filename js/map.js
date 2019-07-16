@@ -88,20 +88,21 @@
   window.changeTypeFlat = function () {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.addEventListener('load', function () {
+    xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
+    xhr.send();
+
+    window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
       var typeDict = {
-        0: 'flat',
+        0: dataitem.offer.type,
         1: 'palace',
         2: 'flat',
         3: 'house',
         4: 'bungalo'
       };
-      window.filteredTypeFlatPins = xhr.response.filter(function (it) {
-        return it.offer.type === typeDict[window.homeTypeFilter.selectedIndex];
-      });
+
+      console.log(window.homeTypeFilter.selectedIndex);
+      return (dataitem.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
     });
-    xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
-    xhr.send();
 
     window.pinButtonAll = document.querySelectorAll('.map__pin--main');
     window.pinButtonAll.forEach(function (item) {

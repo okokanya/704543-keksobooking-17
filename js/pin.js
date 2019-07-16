@@ -15,8 +15,6 @@
       window.mapfield.appendChild(window.pinElement);
       window.data.push(pinsDataToRender[i]);
 
-      console.log(window.data);
-
       var hh = function (e) {
         console.log(e.target);
       };

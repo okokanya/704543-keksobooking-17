@@ -17,18 +17,6 @@ var onSuccess = function (data) {
   window.myServerData = data;
   window.firstFivePins = window.myServerData.slice(0, 5);
   window.forPopUpBlock = window.firstFivePins[0];
-
-  function typeOfFlat(item) {
-    var typeDict = {
-      0: 'flat',
-      1: 'palace',
-      2: 'flat',
-      3: 'house',
-      4: 'bungalo'
-    };
-    return (item.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
-  }
-  window.filteredTypeFlatPins = window.myServerData.filter(typeOfFlat);
 };
 
 var xhr = new XMLHttpRequest();
