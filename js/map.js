@@ -25,12 +25,14 @@
       window.ycoord = window.mapPinMain.offsetTop - shift.y;
       window.xcoord = window.mapPinMain.offsetLeft - shift.x;
       window.addressInput.value = window.xcoord + ', ' + window.ycoord;
+
       if (window.xcoord > (window.mapfield.offsetWidth / 100 * 5) && window.xcoord < window.mapfield.offsetWidth - (window.mapfield.offsetWidth / 100 * 10)) {
         window.mapPinMain.style.left = window.xcoord + 'px';
       }
       if (window.ycoord > 50 && window.ycoord < window.mapfield.offsetHeight - window.mapfield.offsetHeight / 100 * 10) {
         window.mapPinMain.style.top = window.ycoord + 'px';
       }
+      window.mapPinMain.remove();
     };
 
     var onMouseMove = function (moveEvt) {
@@ -99,8 +101,6 @@
         3: 'house',
         4: 'bungalo'
       };
-
-      console.log(window.homeTypeFilter.selectedIndex);
       return (dataitem.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
     });
 
