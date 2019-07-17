@@ -3,16 +3,12 @@
 (function () {
   window.renderPins = function (pinsDataToRender) {
     window.data = [];
-    var hh = function (e) {
-      console.log(e.target);
-      console.log(e.target.id);
-      return e.target.id;
-      console.log(window.data[e.target.hh()]);
 
-      // console.log(window.data[e.target.id]);
+    window.hh = function (e) {
+      console.log(e.currentTarget.id);
+      console.log(window.myServerData[e.currentTarget.id]);
+      return e.currentTarget.id;
     };
-
-
 
     for (var i = 0; i < pinsDataToRender.length; i++) {
       window.pinElement = window.pinButton.cloneNode(true);
@@ -23,11 +19,8 @@
       window.mapfield.appendChild(window.pinElement);
       window.data.push(pinsDataToRender[i]);
       window.pinElement.setAttribute('id', i++);
-
-      window.pinElement.addEventListener('click', hh);
-
+      window.pinElement.addEventListener('click', window.hh);
     }
     return window.pinTemplate;
   };
-
 })();
