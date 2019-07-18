@@ -6,6 +6,14 @@
     window.data = [];
 
     window.rerenderPopup = function (e) {
+
+      
+      window.photosToClear = document.querySelectorAll('.popup__photo');
+      window.photosToClear.forEach(function (oneImg) {
+        oneImg.remove();
+      });
+
+
       window.flatInfo.remove();
       window.showFlatInfo(window.myServerData[e.currentTarget.id]);
     };
