@@ -2,6 +2,7 @@
 (function () {
 
   window.showFlatInfo = function (dataForPopUpBlock) {
+
     var benefitsArray = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
     var placeBenefits = benefitsArray.filter(function (n) {
       return dataForPopUpBlock.offer.features.indexOf(n) !== -1;
@@ -60,6 +61,15 @@
       window.popUpImg.src = dataForPopUpBlock.offer.photos[k];
       window.popupphoto.appendChild(window.popUpImg);
     }
+
+
+    var closePopUp = function () {
+      var actPopup = document.querySelector('.popup');
+      actPopup.style.display = 'none';
+    };
+
+    var closePopUpButton = document.querySelector('.popup__close');
+    closePopUpButton.addEventListener('click', closePopUp);
   };
   return window.flatInfoTemplate;
 })();

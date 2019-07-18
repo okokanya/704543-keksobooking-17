@@ -4,8 +4,6 @@
 
   window.renderPins = function (pinsDataToRender) {
     window.data = [];
-
-
     window.rerenderPopup = function (e) {
 
       var popUpToRemove = document.querySelector('.popup');
