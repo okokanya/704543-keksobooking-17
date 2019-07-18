@@ -1,13 +1,13 @@
 'use strict';
 
 (function () {
+
   window.renderPins = function (pinsDataToRender) {
     window.data = [];
 
-    window.hh = function (e) {
-      console.log(e.currentTarget.id);
-      console.log(window.myServerData[e.currentTarget.id]);
-      return e.currentTarget.id;
+    window.rerenderPopup = function (e) {
+      window.flatInfo.remove();
+      window.showFlatInfo(window.myServerData[e.currentTarget.id]);
     };
 
     for (var i = 0; i < pinsDataToRender.length; i++) {
@@ -19,7 +19,7 @@
       window.mapfield.appendChild(window.pinElement);
       window.data.push(pinsDataToRender[i]);
       window.pinElement.setAttribute('id', i++);
-      window.pinElement.addEventListener('click', window.hh);
+      window.pinElement.addEventListener('click', window.rerenderPopup);
     }
     return window.pinTemplate;
   };
