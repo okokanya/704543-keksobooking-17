@@ -19,4 +19,6 @@ window.timein = document.querySelector('#timein');
 window.timeout = document.querySelector('#timeout');
 window.placeType = document.querySelector('#type');
 window.homeTypeFilter = document.querySelector('#housing-type');
+window.featureslist = window.flatInfo.querySelector('.popup__features');
+
 window.PINHEIGHT = 70;

@@ -5,14 +5,22 @@
   window.renderPins = function (pinsDataToRender) {
     window.data = [];
 
+
     window.rerenderPopup = function (e) {
 
-      
+      var popUpToRemove = document.querySelector('.popup');
+      popUpToRemove.remove();
+
+      var liToRemove = window.featureslist.getElementsByTagName('li');
+      var arrLiToRemove = Array.from(liToRemove);
+      arrLiToRemove.forEach(function (oneLi) {
+        oneLi.remove();
+      });
+
       window.photosToClear = document.querySelectorAll('.popup__photo');
       window.photosToClear.forEach(function (oneImg) {
         oneImg.remove();
       });
-
 
       window.flatInfo.remove();
       window.showFlatInfo(window.myServerData[e.currentTarget.id]);

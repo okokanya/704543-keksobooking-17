@@ -7,7 +7,6 @@
       return dataForPopUpBlock.offer.features.indexOf(n) !== -1;
     });
 
-    window.featureslist = window.flatInfo.querySelector('.popup__features');
     for (var i = 0; i < placeBenefits.length; i++) {
       window.liOfBenefit = document.createElement('li');
       window.liOfBenefit.classList.add('popup__feature');
