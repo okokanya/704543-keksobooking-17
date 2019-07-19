@@ -20,5 +20,7 @@ window.timeout = document.querySelector('#timeout');
 window.placeType = document.querySelector('#type');
 window.homeTypeFilter = document.querySelector('#housing-type');
 window.featureslist = window.flatInfo.querySelector('.popup__features');
+window.roomNumberForm = document.querySelector('#room_number');
+window.capacityForm = document.querySelector('#capacity');
 
 window.PINHEIGHT = 70;
