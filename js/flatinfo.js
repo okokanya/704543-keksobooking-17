@@ -62,7 +62,6 @@
       window.popupphoto.appendChild(window.popUpImg);
     }
 
-
     var closePopUp = function () {
       var actPopup = document.querySelector('.popup');
       actPopup.style.display = 'none';

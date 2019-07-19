@@ -13,6 +13,7 @@
       x: evt.clientX,
       y: evt.clientY
     };
+
     var getCoords = function (sortOfMouseMovm) {
       var shift = {
         x: startCoords.x - sortOfMouseMovm.clientX,
@@ -75,7 +76,6 @@
   window.getActive = function () {
     window.fragment = document.createDocumentFragment();
     window.fragment.appendChild(window.renderPins(window.firstFivePins));
-     
     window.showFlatInfo(window.forPopUpBlock);
     window.indexInSelect();
     window.indexOutSelect();
