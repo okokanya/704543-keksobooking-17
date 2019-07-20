@@ -28,11 +28,10 @@
   };
 
   window.roomsAndCapacity = function () {
-
     var options = window.capacityForm.getElementsByTagName('option');
     var optArray = Array.from(options);
 
-    window.setOrRemove = function (array, whereToSet) {
+    window.setAndRemove = function (array, whereToSet) {
       for (var i = 0; i < array.length; i++) {
         array[i].setAttribute('disabled', false);
       }
@@ -43,16 +42,16 @@
 
     switch (window.roomNumberForm.selectedIndex) {
       case 0:
-        window.setOrRemove(optArray, [2]);
+        window.setAndRemove(optArray, [2]);
         break;
       case 1:
-        window.setOrRemove(optArray, [1, 2]);
+        window.setAndRemove(optArray, [1, 2]);
         break;
       case 2:
-        window.setOrRemove(optArray, [0, 1, 2]);
+        window.setAndRemove(optArray, [0, 1, 2]);
         break;
       case 3:
-        window.setOrRemove(optArray, [3]);
+        window.setAndRemove(optArray, [3]);
         break;
     }
   };

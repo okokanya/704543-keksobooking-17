@@ -1,48 +1,57 @@
 'use strict';
+(function () {
+  window.main = document.querySelector('main');
+  var errorTemplate = document.querySelector('#error');
+  var cloneError = document.importNode(errorTemplate.content, true);
+  var errorPopup = cloneError.querySelector('.error__message');
+  var button = cloneError.querySelector('.error__button');
 
-window.main = document.querySelector('main');
+  var onError = function (message) {
+    window.main.appendChild(cloneError);
+    button.style.display = 'none';
+    errorPopup.textContent = 'Ошибка на сервере: ' + message;
+  };
 
-var errorTemplate = document.querySelector('#error');
-var cloneError = document.importNode(errorTemplate.content, true);
-var pp = cloneError.querySelector('.error__message');
-var button = cloneError.querySelector('.error__button');
+  var onSuccess = function (data) {
+    window.myServerData = data;
+    window.firstFivePins = window.myServerData.slice(0, 5);
+    window.forPopUpBlock = window.firstFivePins[0];
+  };
 
-var onError = function (message) {
-  window.main.appendChild(cloneError);
-  button.style.display = 'none';
-  pp.textContent = 'Ошибка на сервере: ' + message;
-};
+  var xhr = new XMLHttpRequest();
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    var dickServerErrors = {
+      'ok': 200,
+      'badRequest': 400,
+      'unauthorized': 401,
+      'notFound': 404
+    };
 
-var onSuccess = function (data) {
-  window.myServerData = data;
-  window.firstFivePins = window.myServerData.slice(0, 5);
-  window.forPopUpBlock = window.firstFivePins[0];
-};
+    var error;
+    switch (xhr.status) {
+      case dickServerErrors.ok:
+        onSuccess(xhr.response);
+        break;
+      case dickServerErrors.badRequest:
+        error = 'Неверный запрос';
+        break;
+      case dickServerErrors.unauthorized:
+        error = 'Пользователь не авторизован';
+        break;
+      case dickServerErrors.notFound:
+        error = 'Ничего не найдено';
+        break;
+      default:
+        error = xhr.status + ' ' + xhr.statusText;
+    }
+    if (error) {
+      onError(error);
+    }
+  });
 
-var xhr = new XMLHttpRequest();
-xhr.responseType = 'json';
-xhr.addEventListener('load', function () {
-  var error;
-  switch (xhr.status) {
-    case 200:
-      onSuccess(xhr.response);
-      break;
-    case 400:
-      error = 'Неверный запрос';
-      break;
-    case 401:
-      error = 'Пользователь не авторизован';
-      break;
-    case 404:
-      error = 'Ничего не найдено';
-      break;
-    default:
-      error = xhr.status + ' ' + xhr.statusText;
-  }
-  if (error) {
-    onError(error);
-  }
-});
+  xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
+  // xhr.open('GET', 'https://js.dump.academy/keksobooki---ng/data');
 
-xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
-xhr.send();
+  xhr.send();
+})();

@@ -2,7 +2,8 @@
 (function () {
 
   window.showFlatInfo = function (dataForPopUpBlock) {
-
+    var popUpImgWidth = 45;
+    var popUpImgHeight = 40;
     var benefitsArray = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
     var placeBenefits = benefitsArray.filter(function (n) {
       return dataForPopUpBlock.offer.features.indexOf(n) !== -1;
@@ -55,8 +56,8 @@
     for (var k = 0; k < dataForPopUpBlock.offer.photos.length; k++) {
       window.popUpImg = document.createElement('img');
       window.popUpImg.classList.add('popup__photo');
-      window.popUpImg.width = 45;
-      window.popUpImg.height = 40;
+      window.popUpImg.width = popUpImgWidth;
+      window.popUpImg.height = popUpImgHeight;
       window.popUpImg.alt = dataForPopUpBlock.offer.title;
       window.popUpImg.src = dataForPopUpBlock.offer.photos[k];
       window.popupphoto.appendChild(window.popUpImg);
