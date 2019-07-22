@@ -33,12 +33,12 @@
       if (window.ycoord > 50 && window.ycoord < window.mapfield.offsetHeight - window.mapfield.offsetHeight / 100 * 10) {
         window.mapPinMain.style.top = window.ycoord + 'px';
       }
-      window.mapPinMain.remove();
     };
 
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
       getCoords(moveEvt);
+      // window.mapPinMain.remove();
     };
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
@@ -49,7 +49,6 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
     window.mapPinMain.addEventListener('mouseup', window.getActive);
-
   });
   document.querySelector('.map').classList.remove('map--faded');
 

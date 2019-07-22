@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var adFormSubmit = document.querySelector('.ad-form__submit');
+  adFormSubmit.addEventListener('click', function (evt) {
+    evt.preventDefault();
+  });
   window.setMinPrice = function () {
     var minPriceDict = {
       'palace': '10000',
