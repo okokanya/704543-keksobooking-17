@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+
+  
   var adFormSubmit = document.querySelector('.ad-form__submit');
   adFormSubmit.addEventListener('click', function (evt) {
     evt.preventDefault();
@@ -31,9 +33,9 @@
     window.timein.selectedIndex = timeInSelect;
   };
 
-  window.roomsAndCapacity = function () {
+  window.roomsFromCapacity = function () {
     var options = window.capacityForm.getElementsByTagName('option');
-    var optArray = Array.from(options);
+    var optionsArray = Array.from(options);
 
     window.setAndRemove = function (array, whereToSet) {
       for (var i = 0; i < array.length; i++) {
@@ -46,21 +48,21 @@
 
     switch (window.roomNumberForm.selectedIndex) {
       case 0:
-        window.setAndRemove(optArray, [2]);
+        window.setAndRemove(optionsArray, [2]);
         break;
       case 1:
-        window.setAndRemove(optArray, [1, 2]);
+        window.setAndRemove(optionsArray, [1, 2]);
         break;
       case 2:
-        window.setAndRemove(optArray, [0, 1, 2]);
+        window.setAndRemove(optionsArray, [0, 1, 2]);
         break;
       case 3:
-        window.setAndRemove(optArray, [3]);
+        window.setAndRemove(optionsArray, [3]);
         break;
     }
   };
 
-  window.roomNumberForm.addEventListener('change', window.roomsAndCapacity);
+  window.roomNumberForm.addEventListener('change', window.roomsFromCapacity);
   window.timein.addEventListener('change', window.indexInSelect);
   window.timeout.addEventListener('change', window.indexOutSelect);
   window.homeTypeFilter.addEventListener('change', window.changeTypeFlat);

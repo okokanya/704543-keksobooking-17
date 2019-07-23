@@ -1,13 +1,14 @@
 'use strict';
 (function () {
-  window.main = document.querySelector('main');
   var errorTemplate = document.querySelector('#error');
   var cloneError = document.importNode(errorTemplate.content, true);
   var errorPopup = cloneError.querySelector('.error__message');
   var button = cloneError.querySelector('.error__button');
+  var main = document.querySelector('main');
 
   var onError = function (message) {
-    window.main.appendChild(cloneError);
+
+    main.appendChild(cloneError);
     button.style.display = 'none';
     errorPopup.textContent = 'Ошибка на сервере: ' + message;
   };

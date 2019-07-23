@@ -1,10 +1,8 @@
 'use strict';
 
 (function () {
-
   window.renderPins = function (pinsDataToRender) {
     window.mapPinMain.remove();
-
     window.data = [];
     window.rerenderPopup = function (e) {
 

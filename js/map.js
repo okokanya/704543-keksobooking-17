@@ -1,6 +1,11 @@
 'use strict';
 
 (function () {
+
+  var inputsInFieldsets = document.querySelectorAll('fieldset > input');
+  var selectsInFieldsets = document.querySelectorAll('fieldset > select');
+
+
   var xcoord;
   var ycoord;
   window.xcoord = xcoord;
@@ -66,8 +71,8 @@
   window.getInactive = function () {
     window.allMap.classList.add('map--faded');
     window.allForms.classList.add('ad-form--disabled');
-    getDisabled(window.selectsInFieldsets);
-    getDisabled(window.inputsInFieldsets);
+    getDisabled(selectsInFieldsets);
+    getDisabled(inputsInFieldsets);
   };
 
   document.addEventListener('DOMContentLoaded', window.getInactive);
@@ -82,8 +87,8 @@
     window.mapfield.appendChild(window.fragment);
     window.allMap.classList.remove('map--faded');
     window.allForms.classList.remove('ad-form--disabled');
-    getAbled(window.selectsInFieldsets);
-    getAbled(window.inputsInFieldsets);
+    getAbled(selectsInFieldsets);
+    getAbled(inputsInFieldsets);
     document.removeEventListener('mouseup', window.getActive);
   };
 

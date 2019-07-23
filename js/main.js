@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   window.PINHEIGHT = 70;
   window.pinTemplate = document.querySelector('#pin');
   window.flatInfo = document.querySelector('#card')
@@ -14,15 +13,13 @@
   window.imgPin = window.pinButton.querySelector('img');
   window.allMap = document.querySelector('.map');
   window.allForms = document.querySelector('.ad-form');
-  window.inputsInFieldsets = document.querySelectorAll('fieldset > input');
-  window.selectsInFieldsets = document.querySelectorAll('fieldset > select');
   window.addressInput = document.querySelector('#address');
   window.priceForNight = document.querySelector('#price');
   window.timein = document.querySelector('#timein');
   window.timeout = document.querySelector('#timeout');
   window.placeType = document.querySelector('#type');
   window.homeTypeFilter = document.querySelector('#housing-type');
-  window.featureslist = window.flatInfo.querySelector('.popup__features');
   window.roomNumberForm = document.querySelector('#room_number');
+  window.roomCapacity = document.querySelector('#capacity');
   window.capacityForm = document.querySelector('#capacity');
 })();
