@@ -85,8 +85,9 @@
   document.addEventListener('DOMContentLoaded', window.getInactive);
 
   window.getActive = function (e) {
+    var firstFivePins = window.myServerData.slice(0, 6);
     window.fragment = document.createDocumentFragment();
-    window.fragment.appendChild(window.renderPins(window.firstFivePins));
+    window.fragment.appendChild(window.renderPins(firstFivePins));
     window.showFlatInfo(window.forPopUpBlock);
     window.indexInSelect();
     window.indexOutSelect();
@@ -99,6 +100,8 @@
     window.getCoords(e);
 
     document.removeEventListener('mouseup', window.getActive);
+    window.mapPinMain.remove();
+
   };
 
   window.changeTypeFlat = function () {

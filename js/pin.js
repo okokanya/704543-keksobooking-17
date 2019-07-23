@@ -2,10 +2,12 @@
 
 (function () {
   window.renderPins = function (pinsDataToRender) {
-    window.mapPinMain.remove();
-    window.data = [];
-    window.rerenderPopup = function (e) {
+    // window.mapPinMain.remove();
 
+    var pinTemplate = document.querySelector('#pin');
+    window.data = [];
+
+    window.rerenderPopup = function (e) {
       var popUpToRemove = document.querySelector('.popup');
       popUpToRemove.remove();
 
@@ -19,7 +21,6 @@
       window.photosToClear.forEach(function (oneImg) {
         oneImg.remove();
       });
-
       // window.flatInfo.remove();
       window.showFlatInfo(window.myServerData[e.currentTarget.id]);
     };
@@ -35,6 +36,6 @@
       window.pinElement.setAttribute('id', i++);
       window.pinElement.addEventListener('click', window.rerenderPopup);
     }
-    return window.pinTemplate;
+    return pinTemplate;
   };
 })();

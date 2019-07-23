@@ -2,7 +2,7 @@
 
 (function () {
   window.PINHEIGHT = 70;
-  window.pinTemplate = document.querySelector('#pin');
+  // window.pinTemplate = document.querySelector('#pin');
   window.flatInfo = document.querySelector('#card')
         .content
         .querySelector('.popup');

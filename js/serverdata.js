@@ -7,7 +7,6 @@
   var main = document.querySelector('main');
 
   var onError = function (message) {
-
     main.appendChild(cloneError);
     button.style.display = 'none';
     errorPopup.textContent = 'Ошибка на сервере: ' + message;
