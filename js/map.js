@@ -5,7 +5,6 @@
   var inputsInFieldsets = document.querySelectorAll('fieldset > input');
   var selectsInFieldsets = document.querySelectorAll('fieldset > select');
 
-
   var xcoord;
   var ycoord;
   window.xcoord = xcoord;
@@ -19,7 +18,9 @@
       y: evt.clientY
     };
 
-    var getCoords = function (sortOfMouseMovm) {
+    window.getCoords = function (sortOfMouseMovm) {
+      var addressInput = document.querySelector('#address');
+
       var shift = {
         x: startCoords.x - sortOfMouseMovm.clientX,
         y: startCoords.y - sortOfMouseMovm.clientY
@@ -28,9 +29,10 @@
         x: sortOfMouseMovm.clientX,
         y: sortOfMouseMovm.clientY
       };
+
       window.ycoord = window.mapPinMain.offsetTop - shift.y;
       window.xcoord = window.mapPinMain.offsetLeft - shift.x;
-      window.addressInput.value = window.xcoord + ', ' + window.ycoord;
+      addressInput.value = window.xcoord + ', ' + window.ycoord;
 
       if (window.xcoord > (window.mapfield.offsetWidth / 100 * 5) && window.xcoord < window.mapfield.offsetWidth - (window.mapfield.offsetWidth / 100 * 10)) {
         window.mapPinMain.style.left = window.xcoord + 'px';
@@ -38,19 +40,24 @@
       if (window.ycoord > 50 && window.ycoord < window.mapfield.offsetHeight - window.mapfield.offsetHeight / 100 * 10) {
         window.mapPinMain.style.top = window.ycoord + 'px';
       }
+      if (shift.x === 0 && shift.y === 0) {
+        addressInput.value = startCoords.x + ', ' + startCoords.y;
+      }
     };
 
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
-      getCoords(moveEvt);
+      window.getCoords(moveEvt);
       // window.mapPinMain.remove();
     };
+
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-      getCoords(upEvt);
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
+      window.getCoords(upEvt);
     };
+
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
     window.mapPinMain.addEventListener('mouseup', window.getActive);
@@ -77,7 +84,7 @@
 
   document.addEventListener('DOMContentLoaded', window.getInactive);
 
-  window.getActive = function () {
+  window.getActive = function (e) {
     window.fragment = document.createDocumentFragment();
     window.fragment.appendChild(window.renderPins(window.firstFivePins));
     window.showFlatInfo(window.forPopUpBlock);
@@ -89,6 +96,8 @@
     window.allForms.classList.remove('ad-form--disabled');
     getAbled(selectsInFieldsets);
     getAbled(inputsInFieldsets);
+    window.getCoords(e);
+
     document.removeEventListener('mouseup', window.getActive);
   };
 

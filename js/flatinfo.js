@@ -1,9 +1,6 @@
 'use strict';
 (function () {
-
-  var featureslist = window.flatInfo.querySelector('.popup__features');
-
-
+  // var featureslist = window.flatInfo.querySelector('.popup__features');
   window.showFlatInfo = function (dataForPopUpBlock) {
     var popUpImgWidth = 45;
     var popUpImgHeight = 40;
@@ -16,7 +13,7 @@
       window.liOfBenefit = document.createElement('li');
       window.liOfBenefit.classList.add('popup__feature');
       window.liOfBenefit.classList.add('popup__feature--' + placeBenefits[i]);
-      featureslist.appendChild(window.liOfBenefit);
+      window.featureslist.appendChild(window.liOfBenefit);
     }
 
     window.flatInfoTemplate = window.flatInfo.cloneNode(true);
