@@ -5,7 +5,7 @@
     // window.mapPinMain.remove();
 
     var pinTemplate = document.querySelector('#pin');
-    window.data = [];
+    // window.data = [];
 
     window.rerenderPopup = function (e) {
       var popUpToRemove = document.querySelector('.popup');
@@ -32,8 +32,8 @@
       window.imgPin.src = pinsDataToRender[i].author.avatar;
       window.imgPin.alt = pinsDataToRender[i].offer.type;
       window.mapfield.appendChild(window.pinElement);
-      window.data.push(pinsDataToRender[i]);
-      window.pinElement.setAttribute('id', i++);
+      // window.data.push(pinsDataToRender[i]);
+      window.pinElement.setAttribute('id', i);
       window.pinElement.addEventListener('click', window.rerenderPopup);
     }
     return pinTemplate;

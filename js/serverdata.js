@@ -13,8 +13,9 @@
 
   var onSuccess = function (data) {
     window.myServerData = data;
-    window.firstFivePins = window.myServerData;
-    // window.firstFivePins = window.myServerData.slice(0, 5);
+
+    window.firstFivePins = window.myServerData.slice(0, 5);
+
     window.forPopUpBlock = window.firstFivePins[0];
   };
 
@@ -51,7 +52,5 @@
   });
 
   xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
-  // xhr.open('GET', 'https://js.dump.academy/keksobooki---ng/data');
-
   xhr.send();
 })();

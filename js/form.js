@@ -3,21 +3,8 @@
 window.removeWindow = function () {
   document.querySelector('.success').remove();
   window.removeEventListener('mousedown', window.removeWindow);
-  // <ellipse cx="35" cy="35" rx="35" ry="35" fill="rgba(255, 86, 53, 0.7)" />
-
-  // var ellipse = document.createElement('h1');
-  // ellipse.textContent = '555';
-  // ellipse.style.cx = '35';
-  // ellipse.style.rx = '35';
-  // ellipse.style.ry = '35';
-  // ellipse.style.fill = 'rgba(255, 86, 53, 0.7)';
-  // document.querySelector('.map').appendChild(ellipse);
-
   window.main.appendChild(window.mapPinMain);
   window.mapPinMain.querySelector('img').src = 'img/muffin-red.svg';
-
-  // <img src="img/muffin-red.svg"
-
 };
 
 window.removeWindowWithEsc = function (ev) {

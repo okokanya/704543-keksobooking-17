@@ -2,13 +2,11 @@
 
 (function () {
   window.PINHEIGHT = 70;
-  // window.pinTemplate = document.querySelector('#pin');
   window.flatInfo = document.querySelector('#card')
         .content
         .querySelector('.popup');
   window.featureslist = window.flatInfo.querySelector('.popup__features');
   window.main = document.querySelector('main');
-
   window.mapPinMain = document.querySelector('.map__pin--main');
   window.pinButton = document.querySelector('.map__pin');
   window.mapfield = document.querySelector('.map__pins');
@@ -16,7 +14,6 @@
   window.imgPin = window.pinButton.querySelector('img');
   window.allMap = document.querySelector('.map');
   window.allForms = document.querySelector('.ad-form');
-  // window.addressInput = document.querySelector('#address');
   window.priceForNight = document.querySelector('#price');
   window.timein = document.querySelector('#timein');
   window.timeout = document.querySelector('#timeout');

@@ -55,7 +55,6 @@
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
       window.getCoords(moveEvt);
-      // window.mapPinMain.remove();
     };
 
     var onMouseUp = function (upEvt) {
@@ -92,9 +91,8 @@
   document.addEventListener('DOMContentLoaded', window.getInactive);
 
   window.getActive = function (e) {
-    var firstFivePins = window.myServerData.slice(0, 6);
     window.fragment = document.createDocumentFragment();
-    window.fragment.appendChild(window.renderPins(firstFivePins));
+    window.fragment.appendChild(window.renderPins(window.firstFivePins));
     window.showFlatInfo(window.forPopUpBlock);
     window.indexInSelect();
     window.indexOutSelect();
