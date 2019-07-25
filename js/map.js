@@ -10,6 +10,13 @@
   window.xcoord = xcoord;
   window.ycoord = ycoord;
 
+  window.removeAllPins = function () {
+    window.pinButtonAll = document.querySelectorAll('.map__pin--main');
+    window.pinButtonAll.forEach(function (item) {
+      item.remove();
+    });
+  };
+
   window.mapPinMain.addEventListener('mousedown', function (evt) {
 
     evt.preventDefault();
@@ -98,10 +105,8 @@
     getAbled(selectsInFieldsets);
     getAbled(inputsInFieldsets);
     window.getCoords(e);
-
     document.removeEventListener('mouseup', window.getActive);
     window.mapPinMain.remove();
-
   };
 
   window.changeTypeFlat = function () {
@@ -121,10 +126,11 @@
       return (dataitem.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
     });
 
-    window.pinButtonAll = document.querySelectorAll('.map__pin--main');
-    window.pinButtonAll.forEach(function (item) {
-      item.remove();
-    });
+    window.removeAllPins();
+    // window.pinButtonAll = document.querySelectorAll('.map__pin--main');
+    // window.pinButtonAll.forEach(function (item) {
+    //   item.remove();
+    // });
 
     var fragment2 = document.createDocumentFragment();
     fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));

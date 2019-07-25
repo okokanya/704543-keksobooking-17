@@ -5,6 +5,15 @@
   var adFormSubmit = document.querySelector('.ad-form__submit');
   adFormSubmit.addEventListener('click', function (evt) {
     evt.preventDefault();
+    document.getElementById('title').value = '';
+    document.getElementById('address').value = '';
+
+    window.getInactive();
+    window.removeAllPins();
+    document.querySelector('.popup').remove();
+    // window.mapPinMain.remove();
+
+
   });
 
   window.setMinPrice = function () {
