@@ -7,6 +7,7 @@
         .content
         .querySelector('.popup');
   window.featureslist = window.flatInfo.querySelector('.popup__features');
+  window.main = document.querySelector('main');
 
   window.mapPinMain = document.querySelector('.map__pin--main');
   window.pinButton = document.querySelector('.map__pin');

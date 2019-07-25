@@ -4,17 +4,17 @@
   var cloneError = document.importNode(errorTemplate.content, true);
   var errorPopup = cloneError.querySelector('.error__message');
   var button = cloneError.querySelector('.error__button');
-  var main = document.querySelector('main');
 
   var onError = function (message) {
-    main.appendChild(cloneError);
+    window.main.appendChild(cloneError);
     button.style.display = 'none';
     errorPopup.textContent = 'Ошибка на сервере: ' + message;
   };
 
   var onSuccess = function (data) {
     window.myServerData = data;
-    window.firstFivePins = window.myServerData.slice(0, 5);
+    window.firstFivePins = window.myServerData;
+    // window.firstFivePins = window.myServerData.slice(0, 5);
     window.forPopUpBlock = window.firstFivePins[0];
   };
 

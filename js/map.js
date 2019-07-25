@@ -107,6 +107,8 @@
     window.getCoords(e);
     document.removeEventListener('mouseup', window.getActive);
     window.mapPinMain.remove();
+    // window.mapPinMain.style.display = 'none';
+
   };
 
   window.changeTypeFlat = function () {
@@ -127,6 +129,7 @@
     });
 
     window.removeAllPins();
+
     // window.pinButtonAll = document.querySelectorAll('.map__pin--main');
     // window.pinButtonAll.forEach(function (item) {
     //   item.remove();
