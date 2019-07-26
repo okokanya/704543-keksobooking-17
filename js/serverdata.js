@@ -13,9 +13,7 @@
 
   var onSuccess = function (data) {
     window.myServerData = data;
-
     window.firstFivePins = window.myServerData.slice(0, 5);
-
     window.forPopUpBlock = window.firstFivePins[0];
   };
 

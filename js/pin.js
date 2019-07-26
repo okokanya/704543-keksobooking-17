@@ -3,7 +3,6 @@
 (function () {
   window.renderPins = function (pinsDataToRender) {
     // window.mapPinMain.remove();
-
     var pinTemplate = document.querySelector('#pin');
     // window.data = [];
 
@@ -21,7 +20,6 @@
       window.photosToClear.forEach(function (oneImg) {
         oneImg.remove();
       });
-      // window.flatInfo.remove();
       window.showFlatInfo(window.myServerData[e.currentTarget.id]);
     };
 

@@ -91,6 +91,8 @@
   document.addEventListener('DOMContentLoaded', window.getInactive);
 
   window.getActive = function (e) {
+    window.mapPinMain.remove();
+
     window.fragment = document.createDocumentFragment();
     window.fragment.appendChild(window.renderPins(window.firstFivePins));
     window.showFlatInfo(window.forPopUpBlock);
@@ -104,7 +106,7 @@
     getAbled(inputsInFieldsets);
     window.getCoords(e);
     document.removeEventListener('mouseup', window.getActive);
-    window.mapPinMain.remove();
+    // window.mapPinMain.remove();
     // window.mapPinMain.style.display = 'none';
 
   };

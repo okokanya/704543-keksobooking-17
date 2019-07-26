@@ -1,6 +1,5 @@
 'use strict';
 (function () {
-  // var featureslist = window.flatInfo.querySelector('.popup__features');
   window.showFlatInfo = function (dataForPopUpBlock) {
     var popUpImgWidth = 45;
     var popUpImgHeight = 40;

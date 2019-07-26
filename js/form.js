@@ -14,9 +14,7 @@ window.removeWindowWithEsc = function (ev) {
   }
 };
 
-
 (function () {
-
   var adFormSubmit = document.querySelector('.ad-form__submit');
   adFormSubmit.addEventListener('click', function (evt) {
 
@@ -33,9 +31,7 @@ window.removeWindowWithEsc = function (ev) {
     window.main.appendChild(window.cloneSuccess);
     window.addEventListener('mousedown', window.removeWindow);
     window.addEventListener('keydown', window.removeWindowWithEsc);
-
     // window.mapPinMain.remove();
-
   });
 
   window.setMinPrice = function () {
