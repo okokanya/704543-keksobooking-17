@@ -20,8 +20,11 @@
       window.photosToClear.forEach(function (oneImg) {
         oneImg.remove();
       });
-      window.showFlatInfo(window.myServerData[e.currentTarget.id]);
+      window.showFlatInfo(window.data[e.currentTarget.id]);
+
+      // window.showFlatInfo(window.myServerData[e.currentTarget.id]);
     };
+    window.data = [];
 
     for (var i = 0; i < pinsDataToRender.length; i++) {
       window.pinElement = window.pinButton.cloneNode(true);
@@ -31,9 +34,12 @@
       window.imgPin.src = pinsDataToRender[i].author.avatar;
       window.imgPin.alt = pinsDataToRender[i].offer.type;
       window.mapfield.appendChild(window.pinElement);
-      // window.data.push(pinsDataToRender[i]);
+      window.data.push(pinsDataToRender[i]);
       window.pinElement.setAttribute('id', i);
       window.pinElement.addEventListener('click', window.rerenderPopup);
+      // console.log(window.data);
+      // console.log(window.data.id);
+
     }
     return pinTemplate;
   };
