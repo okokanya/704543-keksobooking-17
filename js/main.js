@@ -11,7 +11,7 @@
   window.pinButton = document.querySelector('.map__pin');
   window.mapfield = document.querySelector('.map__pins');
   window.filterContainer = document.querySelector('.map__filters-container');
-  window.imgPin = window.pinButton.querySelector('img');
+  // window.imgPin = window.pinButton.querySelector('img');
   window.allMap = document.querySelector('.map');
   window.allForms = document.querySelector('.ad-form');
   window.priceForNight = document.querySelector('#price');

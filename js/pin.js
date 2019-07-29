@@ -25,6 +25,7 @@
 
     for (var i = 0; i < pinsDataToRender.length; i++) {
       window.pinElement = window.pinButton.cloneNode(true);
+      window.imgPin = window.pinElement.querySelector('img');
       window.pinElement.style.left = pinsDataToRender[i].location.x + 'px';
       window.pinElement.style.top = pinsDataToRender[i].location.y - window.PINHEIGHT + 'px';
       window.imgPin.src = pinsDataToRender[i].author.avatar;

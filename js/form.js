@@ -17,8 +17,11 @@ window.removeWindowWithEsc = function (ev) {
 (function () {
   var adFormSubmit = document.querySelector('.ad-form__submit');
   adFormSubmit.addEventListener('click', function (evt) {
+    var title = document.querySelector('#title');
+    title.value = title.textContent;
+    // evt.preventDefault();
 
-    evt.preventDefault();
+
     document.getElementById('title').value = '';
     document.getElementById('address').value = '';
 
