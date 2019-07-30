@@ -21,5 +21,5 @@
   window.homeTypeFilter = document.querySelector('#housing-type');
   window.roomNumberForm = document.querySelector('#room_number');
   window.roomCapacity = document.querySelector('#capacity');
-  window.capacityForm = document.querySelector('#capacity');
+  // window.capacityForm = document.querySelector('#capacity');
 })();

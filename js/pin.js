@@ -2,13 +2,12 @@
 
 (function () {
   window.renderPins = function (pinsDataToRender) {
-    // window.mapPinMain.remove();
     var pinTemplate = document.querySelector('#pin');
-    // window.data = [];
-
     window.rerenderPopup = function (e) {
       var popUpToRemove = document.querySelector('.popup');
-      popUpToRemove.remove();
+      if (popUpToRemove) {
+        popUpToRemove.remove();
+      }
 
       var liToRemove = window.featureslist.getElementsByTagName('li');
       var arrLiToRemove = Array.from(liToRemove);
@@ -21,7 +20,6 @@
         oneImg.remove();
       });
       window.showFlatInfo(window.data[e.currentTarget.id]);
-
       // window.showFlatInfo(window.myServerData[e.currentTarget.id]);
     };
     window.data = [];
@@ -36,10 +34,8 @@
       window.mapfield.appendChild(window.pinElement);
       window.data.push(pinsDataToRender[i]);
       window.pinElement.setAttribute('id', i);
-      window.pinElement.addEventListener('click', window.rerenderPopup);
-      // console.log(window.data);
-      // console.log(window.data.id);
 
+      window.pinElement.addEventListener('click', window.rerenderPopup);
     }
     return pinTemplate;
   };

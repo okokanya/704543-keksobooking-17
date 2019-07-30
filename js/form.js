@@ -3,8 +3,8 @@
 window.removeWindow = function () {
   document.querySelector('.success').remove();
   window.removeEventListener('mousedown', window.removeWindow);
-  window.main.appendChild(window.mapPinMain);
-  window.mapPinMain.querySelector('img').src = 'img/muffin-red.svg';
+  // window.main.appendChild(window.mapPinMain);
+  // window.mapPinMain.querySelector('img').src = 'img/muffin-red.svg';
 };
 
 window.removeWindowWithEsc = function (ev) {
@@ -19,7 +19,7 @@ window.removeWindowWithEsc = function (ev) {
   adFormSubmit.addEventListener('click', function (evt) {
     var title = document.querySelector('#title');
     title.value = title.textContent;
-    // evt.preventDefault();
+    evt.preventDefault();
 
 
     document.getElementById('title').value = '';
@@ -64,7 +64,7 @@ window.removeWindowWithEsc = function (ev) {
   };
 
   window.roomsFromCapacity = function () {
-    var options = window.capacityForm.getElementsByTagName('option');
+    var options = window.roomCapacity.getElementsByTagName('option');
     var optionsArray = Array.from(options);
 
     window.setAndRemove = function (array, whereToSet) {

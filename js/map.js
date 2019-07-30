@@ -12,9 +12,14 @@
 
   window.removeAllPins = function () {
     window.pinButtonAll = document.querySelectorAll('.map__pin--main');
-    window.pinButtonAll.forEach(function (item) {
-      item.remove();
-    });
+
+    for (var i = 1; i < window.pinButtonAll.length; i++) {
+      window.pinButtonAll[i].remove();
+    }
+
+    // window.pinButtonAll.forEach(function (item) {
+    //   item.remove();
+    // });
   };
 
   window.mapPinMain.addEventListener('mousedown', function (evt) {
@@ -68,6 +73,7 @@
     document.addEventListener('mouseup', onMouseUp);
     window.mapPinMain.addEventListener('mouseup', window.getActive);
   });
+
   document.querySelector('.map').classList.remove('map--faded');
 
   var getDisabled = function (collectionToDisable) {
@@ -91,11 +97,15 @@
   document.addEventListener('DOMContentLoaded', window.getInactive);
 
   window.getActive = function (e) {
-    window.mapPinMain.remove();
+    // window.mapPinMain.remove();
+    // 'click', window.rerenderPopup
+    // window.mapPinMain.removeEventListener('click', window.rerenderPopup);
+    // window.mapPinMain.removeEventListener('mouseup', window.rerenderPopup);
+    document.removeEventListener('mouseup', window.getActive);
 
     window.fragment = document.createDocumentFragment();
     window.fragment.appendChild(window.renderPins(window.firstFivePins));
-    window.showFlatInfo(window.forPopUpBlock);
+    // window.showFlatInfo(window.forPopUpBlock);
     window.indexInSelect();
     window.indexOutSelect();
     window.setMinPrice();
@@ -106,8 +116,7 @@
     getAbled(inputsInFieldsets);
     window.getCoords(e);
     document.removeEventListener('mouseup', window.getActive);
-    // window.mapPinMain.remove();
-    // window.mapPinMain.style.display = 'none';
+    // window.mapPinMain.removeEventListener('mouseup', window.getActive);
 
   };
 
@@ -129,11 +138,6 @@
     });
 
     window.removeAllPins();
-
-    // window.pinButtonAll = document.querySelectorAll('.map__pin--main');
-    // window.pinButtonAll.forEach(function (item) {
-    //   item.remove();
-    // });
 
     var fragment2 = document.createDocumentFragment();
     fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
