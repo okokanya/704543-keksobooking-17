@@ -2,6 +2,8 @@
 
 (function () {
   window.PINHEIGHT = 70;
+  window.PINWIDTH = 65;
+
   window.flatInfo = document.querySelector('#card')
         .content
         .querySelector('.popup');

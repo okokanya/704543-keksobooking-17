@@ -23,6 +23,7 @@
       x: evt.clientX,
       y: evt.clientY
     };
+
     window.getCoords = function (sortOfMouseMovm) {
       var addressInput = document.querySelector('#address');
       var shift = {
@@ -35,14 +36,15 @@
         y: sortOfMouseMovm.clientY
       };
 
-      window.ycoord = window.mapPinMain.offsetTop - shift.y;
       window.xcoord = window.mapPinMain.offsetLeft - shift.x;
+      window.ycoord = window.mapPinMain.offsetTop - shift.y;
       addressInput.value = window.xcoord + ', ' + window.ycoord;
 
-      if (window.xcoord > (window.mapfield.offsetWidth / 100 * 5) && window.xcoord < window.mapfield.offsetWidth - (window.mapfield.offsetWidth / 100 * 10)) {
+      if (window.xcoord < window.mapfield.offsetWidth - window.PINWIDTH && window.xcoord > 1) {
         window.mapPinMain.style.left = window.xcoord + 'px';
       }
-      if (window.ycoord > 50 && window.ycoord < window.mapfield.offsetHeight - window.mapfield.offsetHeight / 100 * 10) {
+
+      if (window.ycoord > 1 && window.ycoord < window.mapfield.offsetHeight) {
         window.mapPinMain.style.top = window.ycoord + 'px';
       }
       if (shift.x === 0 && shift.y === 0) {
