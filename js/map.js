@@ -18,6 +18,7 @@
   };
 
   window.mapPinMain.addEventListener('mousedown', function (evt) {
+    var topPoint = 130;
     evt.preventDefault();
     var startCoords = {
       x: evt.clientX,
@@ -44,7 +45,7 @@
         window.mapPinMain.style.left = window.xcoord + 'px';
       }
 
-      if (window.ycoord > 1 && window.ycoord < window.mapfield.offsetHeight) {
+      if (window.ycoord > topPoint && window.ycoord < window.mapfield.offsetHeight) {
         window.mapPinMain.style.top = window.ycoord + 'px';
       }
       if (shift.x === 0 && shift.y === 0) {
@@ -66,7 +67,6 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-    window.mapPinMain.addEventListener('mouseup', window.getActive);
   });
 
   document.querySelector('.map').classList.remove('map--faded');
@@ -89,12 +89,15 @@
     getDisabled(inputsInFieldsets);
   };
 
+  var mappinact = function () {
+    window.mapPinMain.addEventListener('mouseup', window.getActive);
+  };
+
   document.addEventListener('DOMContentLoaded', window.getInactive);
+  document.addEventListener('DOMContentLoaded', mappinact);
 
   window.getActive = function (e) {
-    window.mapPinMain.removeEventListener('mousedown', window.getActive);
     window.mapPinMain.removeEventListener('mouseup', window.getActive);
-    window.mapPinMain.removeEventListener('click', window.getActive);
     window.fragment = document.createDocumentFragment();
     window.fragment.appendChild(window.renderPins(window.firstFivePins));
     window.indexInSelect();
@@ -106,15 +109,11 @@
     getAbled(selectsInFieldsets);
     getAbled(inputsInFieldsets);
     window.getCoords(e);
-    document.removeEventListener('mouseup', window.getActive);
+    window.mapPinMain.removeEventListener('click', window.getActive);
   };
 
   window.changeTypeFlat = function () {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-    xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
-    xhr.send();
-
+    window.makeXhr();
     window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
       var typeDict = {
         0: dataitem.offer.type,
@@ -125,6 +124,7 @@
       };
       return (dataitem.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
     });
+
     window.removeAllPins();
     var fragment2 = document.createDocumentFragment();
     fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
