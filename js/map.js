@@ -45,11 +45,11 @@
         window.mapPinMain.style.left = window.xcoord + 'px';
       }
 
-      if (window.ycoord > topPoint && window.ycoord < window.mapfield.offsetHeight) {
+      if (window.ycoord > topPoint && window.ycoord < window.mapfield.offsetHeight - window.PINHEIGHT) {
         window.mapPinMain.style.top = window.ycoord + 'px';
       }
       if (shift.x === 0 && shift.y === 0) {
-        addressInput.value = startCoords.x + ', ' + startCoords.y;
+        addressInput.value = startCoords.x - window.PINWIDTH / 2 + ', ' + (startCoords.y - window.PINHEIGHT);
       }
     };
 
