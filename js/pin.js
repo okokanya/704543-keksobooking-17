@@ -20,7 +20,6 @@
         oneImg.remove();
       });
       window.showFlatInfo(window.data[e.currentTarget.id]);
-      // window.showFlatInfo(window.myServerData[e.currentTarget.id]);
     };
     window.data = [];
 

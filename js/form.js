@@ -3,8 +3,6 @@
 window.removeWindow = function () {
   document.querySelector('.success').remove();
   window.removeEventListener('mousedown', window.removeWindow);
-  // window.main.appendChild(window.mapPinMain);
-  // window.mapPinMain.querySelector('img').src = 'img/muffin-red.svg';
 };
 
 window.removeWindowWithEsc = function (ev) {
@@ -21,7 +19,6 @@ window.removeWindowWithEsc = function (ev) {
     title.value = title.textContent;
     evt.preventDefault();
 
-
     document.getElementById('title').value = '';
     document.getElementById('address').value = '';
 
@@ -34,7 +31,6 @@ window.removeWindowWithEsc = function (ev) {
     window.main.appendChild(window.cloneSuccess);
     window.addEventListener('mousedown', window.removeWindow);
     window.addEventListener('keydown', window.removeWindowWithEsc);
-    // window.mapPinMain.remove();
   });
 
   window.setMinPrice = function () {

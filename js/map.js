@@ -12,31 +12,24 @@
 
   window.removeAllPins = function () {
     window.pinButtonAll = document.querySelectorAll('.map__pin--main');
-
     for (var i = 1; i < window.pinButtonAll.length; i++) {
       window.pinButtonAll[i].remove();
     }
-
-    // window.pinButtonAll.forEach(function (item) {
-    //   item.remove();
-    // });
   };
 
   window.mapPinMain.addEventListener('mousedown', function (evt) {
-
     evt.preventDefault();
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
     };
-
     window.getCoords = function (sortOfMouseMovm) {
       var addressInput = document.querySelector('#address');
-
       var shift = {
         x: startCoords.x - sortOfMouseMovm.clientX,
         y: startCoords.y - sortOfMouseMovm.clientY
       };
+
       startCoords = {
         x: sortOfMouseMovm.clientX,
         y: sortOfMouseMovm.clientY
@@ -97,15 +90,11 @@
   document.addEventListener('DOMContentLoaded', window.getInactive);
 
   window.getActive = function (e) {
-    // window.mapPinMain.remove();
-    // 'click', window.rerenderPopup
-    // window.mapPinMain.removeEventListener('click', window.rerenderPopup);
-    // window.mapPinMain.removeEventListener('mouseup', window.rerenderPopup);
-    document.removeEventListener('mouseup', window.getActive);
-
+    window.mapPinMain.removeEventListener('mousedown', window.getActive);
+    window.mapPinMain.removeEventListener('mouseup', window.getActive);
+    window.mapPinMain.removeEventListener('click', window.getActive);
     window.fragment = document.createDocumentFragment();
     window.fragment.appendChild(window.renderPins(window.firstFivePins));
-    // window.showFlatInfo(window.forPopUpBlock);
     window.indexInSelect();
     window.indexOutSelect();
     window.setMinPrice();
@@ -116,8 +105,6 @@
     getAbled(inputsInFieldsets);
     window.getCoords(e);
     document.removeEventListener('mouseup', window.getActive);
-    // window.mapPinMain.removeEventListener('mouseup', window.getActive);
-
   };
 
   window.changeTypeFlat = function () {
@@ -136,9 +123,7 @@
       };
       return (dataitem.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
     });
-
     window.removeAllPins();
-
     var fragment2 = document.createDocumentFragment();
     fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
     document.querySelector('.map__pins').appendChild(fragment2);

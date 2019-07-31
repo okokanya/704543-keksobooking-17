@@ -11,7 +11,6 @@
   window.pinButton = document.querySelector('.map__pin');
   window.mapfield = document.querySelector('.map__pins');
   window.filterContainer = document.querySelector('.map__filters-container');
-  // window.imgPin = window.pinButton.querySelector('img');
   window.allMap = document.querySelector('.map');
   window.allForms = document.querySelector('.ad-form');
   window.priceForNight = document.querySelector('#price');
@@ -21,5 +20,4 @@
   window.homeTypeFilter = document.querySelector('#housing-type');
   window.roomNumberForm = document.querySelector('#room_number');
   window.roomCapacity = document.querySelector('#capacity');
-  // window.capacityForm = document.querySelector('#capacity');
 })();
