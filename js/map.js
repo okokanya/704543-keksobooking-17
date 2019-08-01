@@ -112,6 +112,44 @@
     window.mapPinMain.removeEventListener('click', window.getActive);
   };
 
+  window.changeGuestFilter = function () {
+    window.makeXhr();
+    window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
+      if (window.homeGuestFilter.selectedIndex === 0) {
+        return dataitem;
+      } else if (window.homeGuestFilter.selectedIndex === 1) {
+        return dataitem.offer.guests === 2;
+      } else if (window.homeGuestFilter.selectedIndex === 2) {
+        return dataitem.offer.guests === 1;
+      } else {
+        return dataitem.offer.guests === 0;
+      }
+    });
+    window.removeAllPins();
+    var fragmentGuest = document.createDocumentFragment();
+    fragmentGuest.appendChild(window.renderPins(window.filteredTypeFlatPins));
+    document.querySelector('.map__pins').appendChild(fragmentGuest);
+  };
+
+
+  window.changeRoomsFilter = function () {
+    window.makeXhr();
+    window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
+      if (window.homeRoomsFilter.selectedIndex === 0) {
+        return dataitem;
+      } else if (window.homeRoomsFilter.selectedIndex === 1) {
+        return dataitem.offer.rooms === 1;
+      } else if (window.homeRoomsFilter.selectedIndex === 2) {
+        return dataitem.offer.rooms === 2;
+      } else {
+        return dataitem.offer.rooms === 3;
+      }
+    });
+    window.removeAllPins();
+    var fragmentRooms = document.createDocumentFragment();
+    fragmentRooms.appendChild(window.renderPins(window.filteredTypeFlatPins));
+    document.querySelector('.map__pins').appendChild(fragmentRooms);
+  };
 
   window.changePriceFilter = function () {
     window.makeXhr();
@@ -122,12 +160,11 @@
         return dataitem.offer.price > 10000 && dataitem.offer.price < 500000;
       } else if (window.homePriceFilter.selectedIndex === 2) {
         return dataitem.offer.price < 10000;
-      } else if (window.homePriceFilter.selectedIndex === 3) {
+      } else {
         return dataitem.offer.price > 500000;
       }
     });
     window.removeAllPins();
-
     var fragmentPrice = document.createDocumentFragment();
     fragmentPrice.appendChild(window.renderPins(window.filteredTypeFlatPins));
     document.querySelector('.map__pins').appendChild(fragmentPrice);
@@ -145,11 +182,9 @@
       };
       return (dataitem.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
     });
-
     window.removeAllPins();
-
-    var fragment2 = document.createDocumentFragment();
-    fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
-    document.querySelector('.map__pins').appendChild(fragment2);
+    var fragmentType = document.createDocumentFragment();
+    fragmentType.appendChild(window.renderPins(window.filteredTypeFlatPins));
+    document.querySelector('.map__pins').appendChild(fragmentType);
   };
 })();

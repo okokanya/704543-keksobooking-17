@@ -22,6 +22,9 @@
   window.placeType = document.querySelector('#type');
   window.homeTypeFilter = document.querySelector('#housing-type');
   window.homePriceFilter = document.querySelector('#housing-price');
+  window.homeRoomsFilter = document.querySelector('#housing-rooms');
+  window.homeRoomsFilter = document.querySelector('#housing-rooms');
+  window.homeGuestFilter = document.querySelector('#housing-guests');
   window.roomNumberForm = document.querySelector('#room_number');
   window.roomCapacity = document.querySelector('#capacity');
 

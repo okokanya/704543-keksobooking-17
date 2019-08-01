@@ -94,4 +94,6 @@ window.removeWindowWithEsc = function (ev) {
   window.timeout.addEventListener('change', window.indexOutSelect);
   window.homeTypeFilter.addEventListener('change', window.changeTypeFilter);
   window.homePriceFilter.addEventListener('change', window.changePriceFilter);
+  window.homeRoomsFilter.addEventListener('change', window.changeRoomsFilter);
+  window.homeGuestFilter.addEventListener('change', window.changeGuestFilter);
 })();
