@@ -21,6 +21,8 @@
   window.timeout = document.querySelector('#timeout');
   window.placeType = document.querySelector('#type');
   window.homeTypeFilter = document.querySelector('#housing-type');
+  window.homePriceFilter = document.querySelector('#housing-price');
   window.roomNumberForm = document.querySelector('#room_number');
   window.roomCapacity = document.querySelector('#capacity');
+
 })();

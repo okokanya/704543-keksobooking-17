@@ -112,7 +112,28 @@
     window.mapPinMain.removeEventListener('click', window.getActive);
   };
 
-  window.changeTypeFlat = function () {
+
+  window.changePriceFilter = function () {
+    window.makeXhr();
+    window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
+      if (window.homePriceFilter.selectedIndex === 0) {
+        return dataitem;
+      } else if (window.homePriceFilter.selectedIndex === 1) {
+        return dataitem.offer.price > 10000 && dataitem.offer.price < 500000;
+      } else if (window.homePriceFilter.selectedIndex === 2) {
+        return dataitem.offer.price < 10000;
+      } else if (window.homePriceFilter.selectedIndex === 3) {
+        return dataitem.offer.price > 500000;
+      }
+    });
+    window.removeAllPins();
+
+    var fragmentPrice = document.createDocumentFragment();
+    fragmentPrice.appendChild(window.renderPins(window.filteredTypeFlatPins));
+    document.querySelector('.map__pins').appendChild(fragmentPrice);
+  };
+
+  window.changeTypeFilter = function () {
     window.makeXhr();
     window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
       var typeDict = {
@@ -126,6 +147,7 @@
     });
 
     window.removeAllPins();
+
     var fragment2 = document.createDocumentFragment();
     fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
     document.querySelector('.map__pins').appendChild(fragment2);

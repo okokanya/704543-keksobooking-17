@@ -87,9 +87,11 @@ window.removeWindowWithEsc = function (ev) {
         break;
     }
   };
+  // window.homePriceFilter.addEventListener('change', window.changePriceFilter);
 
   window.roomNumberForm.addEventListener('change', window.roomsFromCapacity);
   window.timein.addEventListener('change', window.indexInSelect);
   window.timeout.addEventListener('change', window.indexOutSelect);
-  window.homeTypeFilter.addEventListener('change', window.changeTypeFlat);
+  window.homeTypeFilter.addEventListener('change', window.changeTypeFilter);
+  window.homePriceFilter.addEventListener('change', window.changePriceFilter);
 })();
