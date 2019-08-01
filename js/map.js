@@ -10,6 +10,12 @@
   window.xcoord = xcoord;
   window.ycoord = ycoord;
 
+  window.createPinFragment = function () {
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(window.renderPins(window.filteredTypeFlatPins));
+    document.querySelector('.map__pins').appendChild(fragment);
+  };
+
   window.removeAllPins = function () {
     window.pinButtonAll = document.querySelectorAll('.map__pin--main');
     for (var i = 1; i < window.pinButtonAll.length; i++) {
@@ -126,11 +132,8 @@
       }
     });
     window.removeAllPins();
-    var fragmentGuest = document.createDocumentFragment();
-    fragmentGuest.appendChild(window.renderPins(window.filteredTypeFlatPins));
-    document.querySelector('.map__pins').appendChild(fragmentGuest);
+    window.createPinFragment();
   };
-
 
   window.changeRoomsFilter = function () {
     window.makeXhr();
@@ -146,9 +149,7 @@
       }
     });
     window.removeAllPins();
-    var fragmentRooms = document.createDocumentFragment();
-    fragmentRooms.appendChild(window.renderPins(window.filteredTypeFlatPins));
-    document.querySelector('.map__pins').appendChild(fragmentRooms);
+    window.createPinFragment();
   };
 
   window.changePriceFilter = function () {
@@ -165,9 +166,7 @@
       }
     });
     window.removeAllPins();
-    var fragmentPrice = document.createDocumentFragment();
-    fragmentPrice.appendChild(window.renderPins(window.filteredTypeFlatPins));
-    document.querySelector('.map__pins').appendChild(fragmentPrice);
+    window.createPinFragment();
   };
 
   window.changeTypeFilter = function () {
@@ -183,8 +182,6 @@
       return (dataitem.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
     });
     window.removeAllPins();
-    var fragmentType = document.createDocumentFragment();
-    fragmentType.appendChild(window.renderPins(window.filteredTypeFlatPins));
-    document.querySelector('.map__pins').appendChild(fragmentType);
+    window.createPinFragment();
   };
 })();
