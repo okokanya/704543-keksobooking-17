@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   var inputsInFieldsets = document.querySelectorAll('fieldset > input');
   var selectsInFieldsets = document.querySelectorAll('fieldset > select');
 
