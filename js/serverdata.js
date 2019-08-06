@@ -20,7 +20,7 @@
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    var dickServerErrors = {
+    var dicktServerErrors = {
       'ok': 200,
       'badRequest': 400,
       'unauthorized': 401,
@@ -29,16 +29,16 @@
 
     var error;
     switch (xhr.status) {
-      case dickServerErrors.ok:
+      case dicktServerErrors.ok:
         onSuccess(xhr.response);
         break;
-      case dickServerErrors.badRequest:
+      case dicktServerErrors.badRequest:
         error = 'Неверный запрос';
         break;
-      case dickServerErrors.unauthorized:
+      case dicktServerErrors.unauthorized:
         error = 'Пользователь не авторизован';
         break;
-      case dickServerErrors.notFound:
+      case dicktServerErrors.notFound:
         error = 'Ничего не найдено';
         break;
       default:

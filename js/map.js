@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   var inputsInFieldsets = document.querySelectorAll('fieldset > input');
   var selectsInFieldsets = document.querySelectorAll('fieldset > select');
 
@@ -10,15 +9,21 @@
   window.xcoord = xcoord;
   window.ycoord = ycoord;
 
+  window.createPinFragment = function () {
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(window.renderPins(window.filteredTypeFlatPins));
+    document.querySelector('.map__pins').appendChild(fragment);
+  };
+
   window.removeAllPins = function () {
     window.pinButtonAll = document.querySelectorAll('.map__pin--main');
-    window.pinButtonAll.forEach(function (item) {
-      item.remove();
-    });
+    for (var i = 1; i < window.pinButtonAll.length; i++) {
+      window.pinButtonAll[i].remove();
+    }
   };
 
   window.mapPinMain.addEventListener('mousedown', function (evt) {
-
+    var topPoint = 130;
     evt.preventDefault();
     var startCoords = {
       x: evt.clientX,
@@ -27,28 +32,29 @@
 
     window.getCoords = function (sortOfMouseMovm) {
       var addressInput = document.querySelector('#address');
-
       var shift = {
         x: startCoords.x - sortOfMouseMovm.clientX,
         y: startCoords.y - sortOfMouseMovm.clientY
       };
+
       startCoords = {
         x: sortOfMouseMovm.clientX,
         y: sortOfMouseMovm.clientY
       };
 
-      window.ycoord = window.mapPinMain.offsetTop - shift.y;
       window.xcoord = window.mapPinMain.offsetLeft - shift.x;
+      window.ycoord = window.mapPinMain.offsetTop - shift.y;
       addressInput.value = window.xcoord + ', ' + window.ycoord;
 
-      if (window.xcoord > (window.mapfield.offsetWidth / 100 * 5) && window.xcoord < window.mapfield.offsetWidth - (window.mapfield.offsetWidth / 100 * 10)) {
+      if (window.xcoord < window.mapfield.offsetWidth - window.PINWIDTH && window.xcoord > 1) {
         window.mapPinMain.style.left = window.xcoord + 'px';
       }
-      if (window.ycoord > 50 && window.ycoord < window.mapfield.offsetHeight - window.mapfield.offsetHeight / 100 * 10) {
+
+      if (window.ycoord > topPoint && window.ycoord < window.mapfield.offsetHeight - window.PINHEIGHT) {
         window.mapPinMain.style.top = window.ycoord + 'px';
       }
       if (shift.x === 0 && shift.y === 0) {
-        addressInput.value = startCoords.x + ', ' + startCoords.y;
+        addressInput.value = startCoords.x - window.PINWIDTH / 2 + ', ' + (startCoords.y - window.PINHEIGHT);
       }
     };
 
@@ -66,8 +72,8 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-    window.mapPinMain.addEventListener('mouseup', window.getActive);
   });
+
   document.querySelector('.map').classList.remove('map--faded');
 
   var getDisabled = function (collectionToDisable) {
@@ -88,14 +94,17 @@
     getDisabled(inputsInFieldsets);
   };
 
+  var mappinact = function () {
+    window.mapPinMain.addEventListener('mouseup', window.getActive);
+  };
+
   document.addEventListener('DOMContentLoaded', window.getInactive);
+  document.addEventListener('DOMContentLoaded', mappinact);
 
   window.getActive = function (e) {
-    window.mapPinMain.remove();
-
+    window.mapPinMain.removeEventListener('mouseup', window.getActive);
     window.fragment = document.createDocumentFragment();
     window.fragment.appendChild(window.renderPins(window.firstFivePins));
-    window.showFlatInfo(window.forPopUpBlock);
     window.indexInSelect();
     window.indexOutSelect();
     window.setMinPrice();
@@ -105,18 +114,62 @@
     getAbled(selectsInFieldsets);
     getAbled(inputsInFieldsets);
     window.getCoords(e);
-    document.removeEventListener('mouseup', window.getActive);
-    // window.mapPinMain.remove();
-    // window.mapPinMain.style.display = 'none';
-
+    window.mapPinMain.removeEventListener('click', window.getActive);
   };
 
-  window.changeTypeFlat = function () {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-    xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
-    xhr.send();
+  window.changeGuestFilter = function () {
+    window.makeXhr();
+    window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
+      if (window.homeGuestFilter.selectedIndex === 0) {
+        return dataitem;
+      } else if (window.homeGuestFilter.selectedIndex === 1) {
+        return dataitem.offer.guests === 2;
+      } else if (window.homeGuestFilter.selectedIndex === 2) {
+        return dataitem.offer.guests === 1;
+      } else {
+        return dataitem.offer.guests === 0;
+      }
+    });
+    window.removeAllPins();
+    window.createPinFragment();
+  };
 
+  window.changeRoomsFilter = function () {
+    window.makeXhr();
+    window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
+      if (window.homeRoomsFilter.selectedIndex === 0) {
+        return dataitem;
+      } else if (window.homeRoomsFilter.selectedIndex === 1) {
+        return dataitem.offer.rooms === 1;
+      } else if (window.homeRoomsFilter.selectedIndex === 2) {
+        return dataitem.offer.rooms === 2;
+      } else {
+        return dataitem.offer.rooms === 3;
+      }
+    });
+    window.removeAllPins();
+    window.createPinFragment();
+  };
+
+  window.changePriceFilter = function () {
+    window.makeXhr();
+    window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
+      if (window.homePriceFilter.selectedIndex === 0) {
+        return dataitem;
+      } else if (window.homePriceFilter.selectedIndex === 1) {
+        return dataitem.offer.price > 10000 && dataitem.offer.price < 500000;
+      } else if (window.homePriceFilter.selectedIndex === 2) {
+        return dataitem.offer.price < 10000;
+      } else {
+        return dataitem.offer.price > 500000;
+      }
+    });
+    window.removeAllPins();
+    window.createPinFragment();
+  };
+
+  window.changeTypeFilter = function () {
+    window.makeXhr();
     window.filteredTypeFlatPins = window.myServerData.filter(function (dataitem) {
       var typeDict = {
         0: dataitem.offer.type,
@@ -127,16 +180,7 @@
       };
       return (dataitem.offer.type === typeDict[window.homeTypeFilter.selectedIndex]);
     });
-
     window.removeAllPins();
-
-    // window.pinButtonAll = document.querySelectorAll('.map__pin--main');
-    // window.pinButtonAll.forEach(function (item) {
-    //   item.remove();
-    // });
-
-    var fragment2 = document.createDocumentFragment();
-    fragment2.appendChild(window.renderPins(window.filteredTypeFlatPins));
-    document.querySelector('.map__pins').appendChild(fragment2);
+    window.createPinFragment();
   };
 })();

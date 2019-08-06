@@ -3,8 +3,6 @@
 window.removeWindow = function () {
   document.querySelector('.success').remove();
   window.removeEventListener('mousedown', window.removeWindow);
-  window.main.appendChild(window.mapPinMain);
-  window.mapPinMain.querySelector('img').src = 'img/muffin-red.svg';
 };
 
 window.removeWindowWithEsc = function (ev) {
@@ -17,8 +15,10 @@ window.removeWindowWithEsc = function (ev) {
 (function () {
   var adFormSubmit = document.querySelector('.ad-form__submit');
   adFormSubmit.addEventListener('click', function (evt) {
-
+    var title = document.querySelector('#title');
+    title.value = title.textContent;
     evt.preventDefault();
+
     document.getElementById('title').value = '';
     document.getElementById('address').value = '';
 
@@ -31,7 +31,6 @@ window.removeWindowWithEsc = function (ev) {
     window.main.appendChild(window.cloneSuccess);
     window.addEventListener('mousedown', window.removeWindow);
     window.addEventListener('keydown', window.removeWindowWithEsc);
-    // window.mapPinMain.remove();
   });
 
   window.setMinPrice = function () {
@@ -61,7 +60,7 @@ window.removeWindowWithEsc = function (ev) {
   };
 
   window.roomsFromCapacity = function () {
-    var options = window.capacityForm.getElementsByTagName('option');
+    var options = window.roomCapacity.getElementsByTagName('option');
     var optionsArray = Array.from(options);
 
     window.setAndRemove = function (array, whereToSet) {
@@ -88,9 +87,11 @@ window.removeWindowWithEsc = function (ev) {
         break;
     }
   };
-
   window.roomNumberForm.addEventListener('change', window.roomsFromCapacity);
   window.timein.addEventListener('change', window.indexInSelect);
   window.timeout.addEventListener('change', window.indexOutSelect);
-  window.homeTypeFilter.addEventListener('change', window.changeTypeFlat);
+  window.homeTypeFilter.addEventListener('change', window.changeTypeFilter);
+  window.homePriceFilter.addEventListener('change', window.changePriceFilter);
+  window.homeRoomsFilter.addEventListener('change', window.changeRoomsFilter);
+  window.homeGuestFilter.addEventListener('change', window.changeGuestFilter);
 })();
